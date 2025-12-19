@@ -7,14 +7,21 @@ export default function WorkshopCard({
   technicianName,
   address,
   rating,
+  mapUrl,
 }) {
-  // Creamos un objeto con toda la info para enviar a LocalPage
-  const localData = { image, companyName, technicianName, address, rating };
+  const localData = {
+    image,
+    companyName,
+    technicianName,
+    address,
+    rating,
+    mapUrl,
+  };
 
   return (
     <Link
-      to="/local-info" // Ruta a LocalPage
-      state={{ local: localData }} // Pasamos los datos
+      to="/local-info"
+      state={{ local: localData }}
       className="block w-full max-w-sm bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
     >
       <img src={image} alt={companyName} className="w-full h-40 object-cover" />

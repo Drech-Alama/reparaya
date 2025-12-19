@@ -19,6 +19,7 @@ export default function Workshop() {
               technicianName={workshop.technicianName}
               address={workshop.address}
               rating={workshop.rating}
+              mapUrl={workshop.mapUrl}
             />
           ))}
         </div>
