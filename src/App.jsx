@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import SplashScreen from "./pages/splashscreen/SplashScreen";
+import PaymentGateway from "./pages/PaymentGateway";
 
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
@@ -35,6 +36,7 @@ function App() {
               <Route path="/historial" element={<RepairHistory />} />
               <Route path="/local-info" element={<LocalPage />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/pago" element={<PaymentGateway />} />
             </Route>
           </Route>
         </Routes>

@@ -7,21 +7,21 @@ export default function Promotion() {
       title: "Descuento especial",
       description: "Aprovecha nuestra promoción limitada",
       image: "./images/promo1.webp",
-      to: "/promocion/especial",
+      to: "/tecnicos",
     },
     {
       id: 2,
       title: "Nuevo producto",
       description: "Descubre nuestra nueva colección",
       image: "./images/promo2.webp",
-      to: "/promocion/nuevo-producto",
+      to: "/tecnicos",
     },
     {
       id: 3,
       title: "Nuevo producto",
       description: "Descubre nuestra nueva colección",
       image: "./images/promo3.webp",
-      to: "/promocion/nuevo-producto",
+      to: "/tecnicos",
     },
   ];
 

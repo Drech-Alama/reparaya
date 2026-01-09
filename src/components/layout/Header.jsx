@@ -37,6 +37,9 @@ export default function Header() {
           <Link to="/historial" className="hover:text-gray-200 transition">
             Historial
           </Link>
+          <Link to="/pago" className="hover:text-gray-200 transition">
+            Membresía
+          </Link>
         </div>
 
         {/* SALIR */}
@@ -88,12 +91,15 @@ export default function Header() {
           >
             Promociones
           </Link>
+          <Link to="/pago" className="hover:text-gray-200 transition">
+            Membresía
+          </Link>
           <button
             onClick={() => {
               handleLogout();
               setIsOpen(false);
             }}
-            className="w-full px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+            className="w-full px-4 py-2 mt-6 bg-black text-white rounded-lg hover:bg-gray-800 transition"
           >
             Cerrar sesión
           </button>

@@ -29,7 +29,7 @@ export default function WorkshopCard({
         <h3 className="text-lg font-bold text-gray-800">{companyName}</h3>
         <p className="text-gray-600">Técnico: {technicianName}</p>
         <p className="text-gray-600">Dirección: {address}</p>
-        <p className="text-yellow-500">⭐ {rating}</p>
+        <p className="text-yellow-500">{rating}</p>
       </div>
     </Link>
   );

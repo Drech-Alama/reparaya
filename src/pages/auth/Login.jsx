@@ -33,7 +33,7 @@ export default function Login() {
       if (data.success) {
         localStorage.setItem("auth", "true");
         localStorage.setItem("correo", form.correo);
-        navigate("/inicio");
+        navigate("/pago");
       } else {
         setError("Correo o contraseña incorrectos");
       }
