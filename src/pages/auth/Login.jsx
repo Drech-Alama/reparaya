@@ -25,7 +25,7 @@ export default function Login() {
         {
           method: "POST",
           body: formData,
-        }
+        },
       );
 
       const data = await res.json();
@@ -33,7 +33,14 @@ export default function Login() {
       if (data.success) {
         localStorage.setItem("auth", "true");
         localStorage.setItem("correo", form.correo);
-        navigate("/pago");
+        // navigate("/inicio");
+        //Esta parte se agregó
+        if (form.correo === "jean@gmail.com") {
+          navigate("/inicio-tecnico");
+        } else {
+          navigate("/inicio");
+        }
+        //Hasta aquí
       } else {
         setError("Correo o contraseña incorrectos");
       }
@@ -73,7 +80,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl shadow-md transition hover:scale-[1.02]"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl shadow-md transition hover:scale-[1.02] cursor-pointer"
         >
           Ingresar
         </button>

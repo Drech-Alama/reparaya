@@ -31,10 +31,10 @@ export default function Register() {
         method: "POST",
         mode: "no-cors",
         body: formData,
-      }
+      },
     );
 
-    navigate("/");
+    navigate("/rol-usuario");
   };
 
   return (
@@ -89,7 +89,7 @@ export default function Register() {
 
         <button
           type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md transition hover:scale-[1.02]"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md transition hover:scale-[1.02] cursor-pointer"
         >
           Registrarme
         </button>

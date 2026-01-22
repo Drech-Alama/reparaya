@@ -29,13 +29,13 @@ export default function Header() {
             Técnicos
           </Link>
 
-          <Link to="/promociones" className="hover:text-gray-200 transition">
+          {/* <Link to="/promociones" className="hover:text-gray-200 transition">
             Promociones
-          </Link>
+          </Link> */}
           <Link to="/historial" className="hover:text-gray-200 transition">
             Historial
           </Link>
-          <Link to="/perfil" className="hover:text-gray-200 transition">
+          <Link to="/perfil-tecnico" className="hover:text-gray-200 transition">
             Perfil
           </Link>
         </div>
