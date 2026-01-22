@@ -44,7 +44,7 @@ export default function Header() {
         <div className="hidden md:block">
           <button
             onClick={handleLogout}
-            className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition cursor-pointer"
+            className="px-4 py-2 bg-black text-white rounded-lg transition cursor-pointer"
           >
             Cerrar sesión
           </button>
@@ -82,22 +82,24 @@ export default function Header() {
           >
             Promociones
           </Link>
+
           <Link to="/historial" className="hover:text-gray-200 transition">
             Historial
           </Link>
+
           <Link
             to="/perfil"
-            className="block hover:text-gray-200 transition"
-            onClick={() => setIsOpen(false)}
+            className="block mt-3 hover:text-gray-200 transition"
           >
             Perfil
           </Link>
+
           <button
             onClick={() => {
               handleLogout();
               setIsOpen(false);
             }}
-            className="w-full px-4 py-2 mt-6 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+            className="w-full px-4 py-2 mt-6 bg-black text-white rounded-lg transition"
           >
             Cerrar sesión
           </button>
