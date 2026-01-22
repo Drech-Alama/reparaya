@@ -25,7 +25,7 @@ export default function Login() {
         {
           method: "POST",
           body: formData,
-        }
+        },
       );
 
       const data = await res.json();
@@ -33,7 +33,7 @@ export default function Login() {
       if (data.success) {
         localStorage.setItem("auth", "true");
         localStorage.setItem("correo", form.correo);
-        navigate("/pago");
+        navigate("/inicio");
       } else {
         setError("Correo o contraseña incorrectos");
       }

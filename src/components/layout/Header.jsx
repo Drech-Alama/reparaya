@@ -28,17 +28,15 @@ export default function Header() {
           <Link to="/tecnicos" className="hover:text-gray-200 transition">
             Técnicos
           </Link>
-          {/* <Link to="/perfil" className="hover:text-gray-200 transition">
-            Perfil
-          </Link> */}
+
           <Link to="/promociones" className="hover:text-gray-200 transition">
             Promociones
           </Link>
           <Link to="/historial" className="hover:text-gray-200 transition">
             Historial
           </Link>
-          <Link to="/pago" className="hover:text-gray-200 transition">
-            Membresía
+          <Link to="/perfil" className="hover:text-gray-200 transition">
+            Perfil
           </Link>
         </div>
 
@@ -77,13 +75,6 @@ export default function Header() {
           >
             Técnicos
           </Link>
-          {/* <Link
-            to="/perfil"
-            className="block hover:text-gray-200 transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Perfil
-          </Link> */}
           <Link
             to="/promociones"
             className="block hover:text-gray-200 transition"
@@ -91,8 +82,15 @@ export default function Header() {
           >
             Promociones
           </Link>
-          <Link to="/pago" className="hover:text-gray-200 transition">
-            Membresía
+          <Link to="/historial" className="hover:text-gray-200 transition">
+            Historial
+          </Link>
+          <Link
+            to="/perfil"
+            className="block hover:text-gray-200 transition"
+            onClick={() => setIsOpen(false)}
+          >
+            Perfil
           </Link>
           <button
             onClick={() => {

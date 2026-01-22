@@ -17,7 +17,7 @@ export default function RoleSelector() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* CLIENTE */}
           <button
-            onClick={() => navigate("/inicio")}
+            onClick={() => navigate("/formulario-cliente")}
             className="group flex flex-col items-center justify-center gap-3 py-6 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-pink-500/50"
           >
             <User size={36} className="group-hover:scale-110 transition" />
@@ -26,7 +26,7 @@ export default function RoleSelector() {
 
           {/* TÉCNICO */}
           <button
-            onClick={() => navigate("/tecnicos")}
+            onClick={() => navigate("/formulario-tecnico")}
             className="group flex flex-col items-center justify-center gap-3 py-6 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-cyan-500/50"
           >
             <Wrench size={36} className="group-hover:rotate-12 transition" />

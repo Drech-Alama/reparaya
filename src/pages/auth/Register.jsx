@@ -31,10 +31,10 @@ export default function Register() {
         method: "POST",
         mode: "no-cors",
         body: formData,
-      }
+      },
     );
 
-    navigate("/");
+    navigate("/rol-usuario");
   };
 
   return (

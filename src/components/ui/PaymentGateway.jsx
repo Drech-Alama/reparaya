@@ -1,21 +1,31 @@
 import { useState } from "react";
 import yapeQR from "/images/qr.png";
 import { useNavigate } from "react-router-dom";
+import { X } from "lucide-react";
 
 export default function PaymentGateway() {
   const [method, setMethod] = useState("yape");
   const navigate = useNavigate();
+
   return (
     <div
       className="fixed inset-0 bg-center bg-cover"
       style={{ backgroundImage: "url('/images/localGT.webp')" }}
     >
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-black/70 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/70 z-0" />
 
       {/* CONTENIDO */}
       <div className="relative z-10 flex items-center justify-center h-full px-4">
-        <div className="bg-white border border-gray-100 shadow-xl rounded-xl p-6 w-full max-w-md">
+        <div className="relative bg-white border border-gray-100 shadow-xl rounded-xl p-6 w-full max-w-md">
+          {/* ❌ BOTÓN CERRAR */}
+          <button
+            onClick={() => navigate("/inicio")}
+            className="absolute top-3 right-3 text-gray-400 hover:text-[rgb(77,177,187)] transition"
+          >
+            <X size={22} />
+          </button>
+
           <h2 className="text-2xl font-bold text-center mb-6">
             Membresía Mensual
           </h2>
@@ -57,7 +67,7 @@ export default function PaymentGateway() {
               <p className="font-semibold mb-2">Monto: S/ 3.00</p>
 
               <button
-                onClick={() => navigate("/rol-usuario")}
+                onClick={() => navigate("/inicio")}
                 className="mt-4 w-full bg-[rgb(77,177,187)] text-white py-2 rounded-lg transition active:scale-95 hover:opacity-90"
               >
                 Pagar
