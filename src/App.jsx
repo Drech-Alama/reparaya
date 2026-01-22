@@ -14,9 +14,11 @@ import RepairHistory from "./pages/customer/RepairHistory.jsx";
 import LocalPage from "./components/ui/LocalPage.jsx";
 import NotFound from "./components/ui/NotFound.jsx";
 import RoleSelector from "./components/ui/RoleSelector.jsx";
+import PaymentGatewayTech from "./components/ui/PaymentGatewayTech.jsx";
 import ClientProfileForm from "./pages/customer/ClientProfileForm.jsx";
 import TechnicianProfileForm from "./pages/technical/TechnicianProfileForm.jsx";
 import ClientProfile from "./pages/customer/ClientProfile.jsx";
+import TechnicianHome from "./pages/technical/TechnicianHome.jsx";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -36,6 +38,9 @@ function App() {
             path="/formulario-tecnico"
             element={<TechnicianProfileForm />}
           />
+          <Route path="/inicio-tecnico" element={<TechnicianHome />} />
+          <Route path="/pago-tecnico" element={<PaymentGatewayTech />} />
+
           <Route element={<PrivateRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/inicio" element={<Home />} />
