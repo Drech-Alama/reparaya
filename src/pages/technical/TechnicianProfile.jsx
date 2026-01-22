@@ -234,7 +234,7 @@ export default function TechnicianProfile() {
 
               <button
                 type="button"
-                onClick={() => navigate("/pago")}
+                onClick={() => navigate("/pago-tecnico")}
                 className="flex items-center gap-2 bg-[rgb(77,177,187)] text-white px-4 py-2 rounded-lg hover:opacity-90 active:scale-95 transition"
               >
                 <CreditCard size={18} />

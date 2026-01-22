@@ -67,7 +67,7 @@ export default function PaymentGatewayTech() {
               <p className="font-semibold mb-2">Monto: S/ 4.00</p>
 
               <button
-                onClick={() => navigate("/inicio")}
+                onClick={() => navigate("/inicio-tecnico")}
                 className="mt-4 w-full bg-[rgb(77,177,187)] text-white py-2 rounded-lg transition active:scale-95 hover:opacity-90"
               >
                 Pagar

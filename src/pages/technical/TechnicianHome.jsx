@@ -4,8 +4,14 @@ import { useNavigate } from "react-router-dom";
 export default function TechnicianHome() {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    localStorage.removeItem("correo");
+    navigate("/");
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-10">
+    <div className="min-h-screen bg-gray-100 px-4 pt-24">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* HERO */}
         <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
@@ -20,8 +26,8 @@ export default function TechnicianHome() {
           </div>
 
           <button
-            onClick={() => navigate("/tecnico/promocionar")}
-            className="flex items-center gap-2 bg-[rgb(77,177,187)] text-white px-6 py-3 rounded-xl hover:opacity-90 active:scale-95 transition"
+            onClick={() => navigate("/pago-tecnico")}
+            className="flex items-center gap-2 bg-[rgb(77,177,187)] text-white px-6 py-3 rounded-xl hover:opacity-90 active:scale-95 transition cursor-pointer"
           >
             <Megaphone size={20} />
             Promociona tu servicio
@@ -36,8 +42,8 @@ export default function TechnicianHome() {
               Administra los servicios que ofreces.
             </p>
             <button
-              onClick={() => navigate("/tecnico/servicios")}
-              className="text-sm text-[rgb(77,177,187)] font-medium hover:underline"
+              onClick={() => navigate("/servicios-tecnico")}
+              className="text-sm text-[rgb(77,177,187)] font-medium hover:underline cursor-pointer"
             >
               Ver servicios →
             </button>
@@ -49,8 +55,8 @@ export default function TechnicianHome() {
               Actualiza tu información y datos profesionales.
             </p>
             <button
-              onClick={() => navigate("/tecnico/perfil")}
-              className="text-sm text-[rgb(77,177,187)] font-medium hover:underline"
+              onClick={() => navigate("/tecnico-perfil")}
+              className="text-sm text-[rgb(77,177,187)] font-medium hover:underline cursor-pointer"
             >
               Editar perfil →
             </button>
@@ -64,8 +70,8 @@ export default function TechnicianHome() {
               Destaca tu servicio por más tiempo.
             </p>
             <button
-              onClick={() => navigate("/tecnico/promocionar")}
-              className="inline-flex items-center gap-2 text-sm text-[rgb(77,177,187)] font-medium hover:underline"
+              onClick={() => navigate("/promociones-tecnico")}
+              className="inline-flex items-center gap-2 text-sm text-[rgb(77,177,187)] font-medium hover:underline cursor-pointer"
             >
               <PlusCircle size={16} />
               Crear promoción
@@ -77,9 +83,18 @@ export default function TechnicianHome() {
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
           <p className="text-sm text-gray-600">
             💡 Los técnicos con perfil completo y promociones activas reciben
-            hasta <span className="font-semibold">3x más solicitudes</span>.
+            hasta <span className="font-semibold">más solicitudes</span>.
           </p>
         </div>
+        <button
+          onClick={() => {
+            handleLogout();
+            setIsOpen(false);
+          }}
+          className="w-full px-4 py-2 mt-6 border border-[rgb(77,177,187)] hover:bg-[rgb(77,177,187)] font-semibold text-black rounded-lg transition cursor-pointer"
+        >
+          Cerrar sesión
+        </button>
       </div>
     </div>
   );

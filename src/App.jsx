@@ -17,8 +17,11 @@ import RoleSelector from "./components/ui/RoleSelector.jsx";
 import PaymentGatewayTech from "./components/ui/PaymentGatewayTech.jsx";
 import ClientProfileForm from "./pages/customer/ClientProfileForm.jsx";
 import TechnicianProfileForm from "./pages/technical/TechnicianProfileForm.jsx";
+import TechnicianProfile from "./pages/technical/TechnicianProfile.jsx";
 import ClientProfile from "./pages/customer/ClientProfile.jsx";
 import TechnicianHome from "./pages/technical/TechnicianHome.jsx";
+import ServicesTechnician from "./pages/technical/ServicesTechnician.jsx";
+import PromotionTechnician from "./pages/technical/PromotionTechnician.jsx";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -40,6 +43,12 @@ function App() {
           />
           <Route path="/inicio-tecnico" element={<TechnicianHome />} />
           <Route path="/pago-tecnico" element={<PaymentGatewayTech />} />
+          <Route path="/tecnico-perfil" element={<TechnicianProfile />} />
+          <Route path="/servicios-tecnico" element={<ServicesTechnician />} />
+          <Route
+            path="/promociones-tecnico"
+            element={<PromotionTechnician />}
+          />
 
           <Route element={<PrivateRoute />}>
             <Route element={<MainLayout />}>
