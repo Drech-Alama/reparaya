@@ -1,70 +1,143 @@
-// RepairHistory.jsx
-import React from "react";
+import { Wrench, CheckCircle, XCircle } from "lucide-react";
 
 const repairData = [
   {
     id: 1,
-    date: "2025-12-01",
+    date: "01/12/2025",
     location: "Taller Central",
     problem: "Cambio de pantalla",
     paid: true,
   },
   {
     id: 2,
-    date: "2025-11-15",
+    date: "15/11/2025",
     location: "Taller Norte",
     problem: "Batería no carga",
     paid: false,
   },
   {
     id: 3,
-    date: "2025-10-28",
+    date: "28/10/2025",
     location: "Taller Sur",
     problem: "Problema con altavoz",
     paid: true,
   },
-  // Agrega más registros si quieres
+  {
+    id: 3,
+    date: "20/01/2026",
+    location: "Taller Sur",
+    problem: "Problema con altavoz",
+    paid: true,
+  },
 ];
 
 export default function RepairHistory() {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
-        Repair History
-      </h2>
+    <div className="min-h-screen bg-gray-100 px-4 pt-24">
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* HEADER */}
+        <div className="flex flex-col items-center justify-center gap-3">
+          <div className="bg-[rgb(77,177,187)] p-3 rounded-xl text-white">
+            <Wrench size={24} />
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800">
+              Historial de Reparaciones
+            </h2>
+            <p className="text-sm text-gray-500">
+              Revisa todas tus reparaciones realizadas
+            </p>
+          </div>
+        </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
-          <thead className="bg-blue-500 text-white">
-            <tr>
-              <th className="py-3 px-6 text-left">Fecha de Reparación</th>
-              <th className="py-3 px-6 text-left">Lugar de Reparación</th>
-              <th className="py-3 px-6 text-left">Problema Técnico</th>
-              <th className="py-3 px-6 text-left">Pagado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {repairData.map((item, index) => (
-              <tr
-                key={item.id}
-                className={`transition-colors duration-200 ${
-                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                } hover:bg-blue-100`}
-              >
-                <td className="py-3 px-6">{item.date}</td>
-                <td className="py-3 px-6">{item.location}</td>
-                <td className="py-3 px-6">{item.problem}</td>
-                <td
-                  className={`py-3 px-6 font-semibold ${
-                    item.paid ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {item.paid ? "Sí" : "No"}
-                </td>
+        {/* TABLA DESKTOP */}
+        <div className="hidden md:block bg-white rounded-2xl shadow-sm overflow-hidden">
+          <table className="min-w-full">
+            <thead className="bg-[rgb(77,177,187)]">
+              <tr>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                  Fecha
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                  Taller
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                  Problema
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                  Estado
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {repairData.map((item, index) => (
+                <tr
+                  key={item.id}
+                  className="border-b last:border-none hover:bg-gray-50 transition"
+                >
+                  <td className="px-6 py-4 text-sm text-gray-700">
+                    {item.date}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-700">
+                    {item.location}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-700">
+                    {item.problem}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.paid ? (
+                      <span className="inline-flex items-center gap-2 text-xs font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                        <CheckCircle size={14} />
+                        Pagado
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 text-xs font-medium bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                        <XCircle size={14} />
+                        Pendiente
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* CARDS MOBILE */}
+        <div className="md:hidden space-y-4">
+          {repairData.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-xl p-4 shadow-sm space-y-2"
+            >
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-semibold text-gray-700">
+                  {item.problem}
+                </span>
+                {item.paid ? (
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                    Pagado
+                  </span>
+                ) : (
+                  <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                    Pendiente
+                  </span>
+                )}
+              </div>
+
+              <p className="text-xs text-gray-500">📅 {item.date}</p>
+              <p className="text-xs text-gray-500">📍 {item.location}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* FOOTER INFO */}
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+          <p className="text-sm text-gray-600">
+            ℹ️ Si tienes alguna duda sobre una reparación, puedes contactar al
+            taller correspondiente desde la sección de soporte.
+          </p>
+        </div>
       </div>
     </div>
   );
