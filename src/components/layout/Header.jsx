@@ -28,9 +28,9 @@ export default function Header() {
           <Link to="/tecnicos" className="hover:text-gray-200 transition">
             Técnicos
           </Link>
-          <Link to="/perfil" className="hover:text-gray-200 transition">
+          {/* <Link to="/perfil" className="hover:text-gray-200 transition">
             Perfil
-          </Link>
+          </Link> */}
           <Link to="/promociones" className="hover:text-gray-200 transition">
             Promociones
           </Link>
@@ -77,13 +77,13 @@ export default function Header() {
           >
             Técnicos
           </Link>
-          <Link
+          {/* <Link
             to="/perfil"
             className="block hover:text-gray-200 transition"
             onClick={() => setIsOpen(false)}
           >
             Perfil
-          </Link>
+          </Link> */}
           <Link
             to="/promociones"
             className="block hover:text-gray-200 transition"
