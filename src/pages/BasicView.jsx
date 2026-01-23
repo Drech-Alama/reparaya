@@ -31,8 +31,8 @@ export default function FullScreenSlider() {
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-black">
-      <div className="w-full h-20 fixed top-0 z-10 bg-black"></div>
-      {/* SLIDER */}
+      <div className="w-full h-20 fixed top-0 z-10 bg-transparent lg:bg-black"></div>
+
       <div className="relative flex-1 min-h-0 overflow-hidden">
         <div
           className="flex h-full transition-transform duration-700 ease-in-out"
@@ -77,11 +77,11 @@ export default function FullScreenSlider() {
       {/* BOTÓN */}
       <div className="flex items-center justify-center py-6">
         <Link
-          to="/tecnicos"
+          to="/login"
           className="px-10 py-3 bg-[rgb(22,183,183)] text-white rounded-xl text-lg font-semibold
 transition transform hover:scale-105 hover:bg-[rgb(18,150,150)] inline-block text-center"
         >
-          Buscar técnicos
+          Iniciar Sesión
         </Link>
       </div>
     </div>

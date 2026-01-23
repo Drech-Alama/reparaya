@@ -8,19 +8,13 @@ export default function PaymentGatewayTech() {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="fixed inset-0 bg-center bg-cover"
-      style={{ backgroundImage: "url('/images/localGT.webp')" }}
-    >
-      {/* OVERLAY */}
-      <div className="absolute inset-0 bg-black/70 z-0" />
-
+    <div className="fixed inset-0 bg-center bg-cover">
       {/* CONTENIDO */}
       <div className="relative z-10 flex items-center justify-center h-full px-4">
         <div className="relative bg-white border border-gray-100 shadow-xl rounded-xl p-6 w-full max-w-md">
           {/* ❌ BOTÓN CERRAR */}
           <button
-            onClick={() => navigate("/inicio")}
+            onClick={() => navigate("/inicio-tecnico")}
             className="absolute top-3 right-3 text-gray-400 hover:text-[rgb(77,177,187)] transition"
           >
             <X size={22} />
