@@ -91,7 +91,7 @@ export default function TechnicianHome() {
             handleLogout();
             setIsOpen(false);
           }}
-          className="w-full px-4 py-2 mt-6 border border-[rgb(77,177,187)] hover:bg-[rgb(77,177,187)] font-semibold text-black rounded-lg transition cursor-pointer"
+          className="w-full px-4 py-2 mt-6 mb-12 border border-[rgb(77,177,187)] hover:bg-[rgb(77,177,187)] font-semibold text-black rounded-lg transition cursor-pointer"
         >
           Cerrar sesión
         </button>

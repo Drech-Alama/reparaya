@@ -22,6 +22,7 @@ import ClientProfile from "./pages/customer/ClientProfile.jsx";
 import TechnicianHome from "./pages/technical/TechnicianHome.jsx";
 import ServicesTechnician from "./pages/technical/ServicesTechnician.jsx";
 import PromotionTechnician from "./pages/technical/PromotionTechnician.jsx";
+import BasicView from "./pages/BasicView.jsx";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -32,8 +33,9 @@ function App() {
 
       {!showSplash && (
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<BasicView />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/rol-usuario" element={<RoleSelector />} />
           <Route path="/pago" element={<PaymentGateway />} />
           <Route path="/formulario-cliente" element={<ClientProfileForm />} />
