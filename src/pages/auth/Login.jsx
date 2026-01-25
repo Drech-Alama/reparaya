@@ -1,91 +1,74 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [form, setForm] = useState({
-    correo: "",
-    password: "",
-  });
-
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError("");
 
-    try {
-      const formData = new FormData();
-      formData.append("action", "login");
-      formData.append("correo", form.correo);
-      formData.append("password", form.password);
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const user = users.find((u) => u.email === email);
 
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbzke6J2C_WLAlccx3lVQBt5vo2U5ItMaWxFys7ww5OKi3_cCA6S_jscBMNdUvHt38QW/exec",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-
-      const data = await res.json();
-
-      if (data.success) {
-        localStorage.setItem("auth", "true");
-        localStorage.setItem("correo", form.correo);
-        navigate("/inicio");
-      } else {
-        setError("Correo o contraseña incorrectos");
-      }
-    } catch (err) {
-      setError("Error de conexión");
-      console.error(err);
+    if (!user) {
+      setError("Usuario no registrado");
+      return;
     }
+    if (user.password !== password) {
+      setError("Contraseña incorrecta");
+      return;
+    }
+
+    // Guardar usuario logueado en localStorage para persistencia
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
+    // Redirigir según rol
+    if (user.role === "cliente") navigate("/home");
+    else if (user.role === "tecnico") navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray-100">
       <form
         onSubmit={handleLogin}
-        className="bg-white w-full mx-5 max-w-sm p-6 rounded-2xl shadow-xl space-y-4"
+        className="bg-white p-8 rounded shadow-md w-96"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800">
-          Iniciar sesión
-        </h2>
+        <h2 className="text-2xl mb-6 text-center font-bold">Login</h2>
 
         <input
           type="email"
           placeholder="Correo"
-          onChange={(e) => setForm({ ...form, correo: e.target.value })}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full mb-4 p-2 border rounded"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[rgb(77,177,187)]"
         />
-
         <input
           type="password"
           placeholder="Contraseña"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full mb-4 p-2 border rounded"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[rgb(77,177,187)]"
         />
 
-        {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        <button
-          type="submit"
-          className="w-full bg-[rgb(77,177,187)] text-white font-semibold py-3 rounded-xl shadow-md transition hover:scale-[1.02] cursor-pointer"
-        >
-          Ingresar
+        <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+          Iniciar sesión
         </button>
 
-        <p className="text-center text-sm text-gray-600">
+        <p className="mt-4 text-center text-sm">
           ¿No tienes cuenta?{" "}
-          <Link
-            to="/rol-usuario"
-            className="text-[rgb(77,177,187)] hover:underline"
+          <span
+            className="text-green-500 cursor-pointer"
+            onClick={() => navigate("/register")}
           >
             Crear cuenta
-          </Link>
+          </span>
         </p>
       </form>
     </div>
