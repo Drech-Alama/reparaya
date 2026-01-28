@@ -65,14 +65,16 @@ export default function Register() {
   if (step === "role") {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+
         <h2 className="text-2xl font-bold mb-6">Selecciona tu rol</h2>
-        <div className="flex space-x-4">
+        <div className="flex flex-col gap-8 items-center justify-center">
+          <div className="flex gap-5">
           <button
             onClick={() => {
               setRole("cliente");
               setStep("form");
             }}
-            className="bg-[var(--color-blanco)] text-[var(--color-principal)] p-3 rounded hover:bg-[var(--color-principal-hover)] hover:text-white transition"
+            className="bg-[var(--color-blanco)] text-[var(--color-principal)] p-3 rounded hover:bg-[var(--color-principal-hover)] hover:text-white transition cursor-pointer"
           >
             Cliente
           </button>
@@ -81,10 +83,20 @@ export default function Register() {
               setRole("tecnico");
               setStep("form");
             }}
-            className="bg-[var(--color-principal)] text-[var(--color-blanco)] p-3 rounded hover:bg-[var(--color-principal-hover)]  transition"
+            className="bg-[var(--color-principal)] text-[var(--color-blanco)] p-3 rounded hover:bg-[var(--color-principal-hover)]  transition cursor-pointer"
           >
             Técnico
           </button>
+            </div>
+                   {/* Volver a login */}
+      <button
+        type="button"
+        onClick={() => navigate("/login")}
+        className=" flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] transition cursor-pointer"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Volver
+      </button>
         </div>
       </div>
     );
@@ -103,7 +115,7 @@ export default function Register() {
             setStep("role");
             setRole(null);
           }}
-          className="flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] mb-4 cursor-pointer"
+          className="flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] mb-4 transition cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver
