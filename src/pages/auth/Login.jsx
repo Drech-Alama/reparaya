@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -36,8 +37,15 @@ export default function Login() {
         onSubmit={handleLogin}
         className="bg-white p-8 rounded shadow-md w-96"
       >
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] mb-4 cursor-pointer"
+        >
+          <ArrowLeft size={18} />
+          Volver
+        </button>
         <h2 className="text-2xl mb-6 text-center font-bold">Login</h2>
-
         <input
           type="email"
           placeholder="Correo"

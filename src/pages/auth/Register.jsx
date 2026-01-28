@@ -69,34 +69,34 @@ export default function Register() {
         <h2 className="text-2xl font-bold mb-6">Selecciona tu rol</h2>
         <div className="flex flex-col gap-8 items-center justify-center">
           <div className="flex gap-5">
+            <button
+              onClick={() => {
+                setRole("cliente");
+                setStep("form");
+              }}
+              className="bg-[var(--color-blanco)] text-[var(--color-principal)] p-3 rounded hover:bg-[var(--color-principal-hover)] hover:text-white transition cursor-pointer"
+            >
+              Cliente
+            </button>
+            <button
+              onClick={() => {
+                setRole("tecnico");
+                setStep("form");
+              }}
+              className="bg-[var(--color-principal)] text-[var(--color-blanco)] p-3 rounded hover:bg-[var(--color-principal-hover)]  transition cursor-pointer"
+            >
+              Técnico
+            </button>
+          </div>
+          {/* Volver a la web */}
           <button
-            onClick={() => {
-              setRole("cliente");
-              setStep("form");
-            }}
-            className="bg-[var(--color-blanco)] text-[var(--color-principal)] p-3 rounded hover:bg-[var(--color-principal-hover)] hover:text-white transition cursor-pointer"
+            type="button"
+            onClick={() => navigate("/")}
+            className=" flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] transition cursor-pointer"
           >
-            Cliente
+            <ArrowLeft className="w-4 h-4" />
+            Volver
           </button>
-          <button
-            onClick={() => {
-              setRole("tecnico");
-              setStep("form");
-            }}
-            className="bg-[var(--color-principal)] text-[var(--color-blanco)] p-3 rounded hover:bg-[var(--color-principal-hover)]  transition cursor-pointer"
-          >
-            Técnico
-          </button>
-            </div>
-                   {/* Volver a login */}
-      <button
-        type="button"
-        onClick={() => navigate("/login")}
-        className=" flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] transition cursor-pointer"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Volver
-      </button>
         </div>
       </div>
     );

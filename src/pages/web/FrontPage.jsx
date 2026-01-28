@@ -21,13 +21,13 @@ export default function FrontPage() {
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <button
             onClick={() => navigate("/login")}
-            className="bg-[var(--color-principal)] text-white font-semibold px-6 py-3 rounded shadow-lg hover:bg-[var(--color-principal-hover)] transition"
+            className="bg-[var(--color-principal)] text-white font-semibold px-6 py-3 rounded shadow-lg hover:bg-[var(--color-principal-hover)] transition cursor-pointer"
           >
             Iniciar Sesión
           </button>
           <button
             onClick={() => navigate("/register")}
-            className="bg-[var(--color-blanco)] text-[var(--color-principal)] font-semibold px-6 py-3 rounded shadow-lg hover:bg-[var(--color-principal-hover)] hover:text-white transition"
+            className="bg-[var(--color-blanco)] text-[var(--color-principal)] font-semibold px-6 py-3 rounded shadow-lg hover:bg-[var(--color-principal-hover)] hover:text-white transition cursor-pointer"
           >
             Crear Cuenta
           </button>

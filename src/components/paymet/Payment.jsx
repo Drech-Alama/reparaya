@@ -13,15 +13,36 @@ export default function Payment() {
         <div className="bg-gray-200 h-64 mb-4 flex items-center justify-center">
           <span className="text-gray-500">[QR / Tarjeta aquí]</span>
         </div>
-        <button
-          onClick={() => {
-            if (role === "cliente") navigate("/home", { state: { role } });
-            else if (role === "tecnico") navigate("/dashboard", { state: { role } });
-          }}
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          Confirmar Pago
-        </button>
+<button
+  onClick={() => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Tomamos el último usuario registrado (el que acaba de pagar)
+    const lastUser = users[users.length - 1];
+
+    if (!lastUser) return;
+
+    // Guardamos sesión ligera
+    const currentUser = {
+      fullName: lastUser.fullName,
+      username: lastUser.username,
+      email: lastUser.email,
+      role: lastUser.role,
+    };
+
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    // Redirección por rol
+    if (role === "cliente") {
+      navigate("/home");
+    } else if (role === "tecnico") {
+      navigate("/dashboard");
+    }
+  }}
+  className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+>
+  Confirmar Pago
+</button>
       </div>
     </div>
   );
