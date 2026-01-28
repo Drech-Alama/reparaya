@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Pencil } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -70,7 +72,7 @@ export default function Register() {
               setRole("cliente");
               setStep("form");
             }}
-            className="bg-green-500 text-white p-3 rounded hover:bg-green-600"
+            className="bg-[var(--color-blanco)] text-[var(--color-principal)] p-3 rounded hover:bg-[var(--color-principal-hover)] hover:text-white transition"
           >
             Cliente
           </button>
@@ -79,7 +81,7 @@ export default function Register() {
               setRole("tecnico");
               setStep("form");
             }}
-            className="bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+            className="bg-[var(--color-principal)] text-[var(--color-blanco)] p-3 rounded hover:bg-[var(--color-principal-hover)]  transition"
           >
             Técnico
           </button>
@@ -95,39 +97,92 @@ export default function Register() {
         onSubmit={handleRegister}
         className="bg-white p-8 rounded shadow-md w-full max-w-lg"
       >
-        <h2 className="text-2xl mb-6 text-center font-bold">
+        <button
+          type="button"
+          onClick={() => {
+            setStep("role");
+            setRole(null);
+          }}
+          className="flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-principal)] mb-4 cursor-pointer"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Volver
+        </button>
+        <h2 className="text-2xl mb-6 text-center text-[var(--color-principal)] font-bold">
           Registro {role === "cliente" ? "Cliente" : "Técnico"}
         </h2>
 
-        <input type="text" placeholder="Nombres y apellidos" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="text" placeholder="Nombre de usuario" name="username" value={formData.username} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="email" placeholder="Correo" name="email" value={formData.email} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="password" placeholder="Contraseña" name="password" value={formData.password} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="tel" placeholder="Teléfono" name="phone" value={formData.phone} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="text" placeholder="País" name="country" value={formData.country} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="text" placeholder="Departamento" name="department" value={formData.department} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-        <input type="text" placeholder="Distrito" name="district" value={formData.district} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
+        <div className="flex flex-col items-center gap-3">
+          {/* Foto opcional */}
+          <div className="mb-3">
+            <label className="block mb-1 text-center text-gray-500">Foto (opcional)</label>
+
+            <div className="relative w-32 h-32">
+              {/* Input oculto */}
+              <input
+                type="file"
+                name="photo"
+                accept="image/*"
+                onChange={handleChange}
+                id="photoInput"
+                className="hidden"
+              />
+
+              {/* Imagen o placeholder */}
+              {preview ? (
+                <img
+                  src={preview}
+                  alt="Previsualización"
+                  className="w-32 h-32 object-cover rounded-full border border-gray-300 "
+                />
+              ) : (
+                <div className="w-32 h-32 flex items-center justify-center bg-gray-100 rounded-full border border-gray-300 text-gray-400 text-sm">
+                  Subir foto
+                </div>
+              )}
+
+              {/* LÁPIZ CLICK */}
+              <label
+                htmlFor="photoInput"
+                className="absolute bottom-1 right-1 z-30 bg-[var(--color-principal)] p-1.5 rounded-full cursor-pointer hover:bg-[var(--color-principal-hover)] transition"
+              >
+                <Pencil className="w-4 h-4 text-white" />
+              </label>
+            </div>
+          </div>
+
+          <div className="border border-gray-200 p-5 mb-3">
+            <div className="flex flex-col md:flex-row md:gap-5">
+              <input type="text" placeholder="Nombres y apellidos" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+              <input type="text" placeholder="Nombre de usuario" name="username" value={formData.username} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+            </div>
+
+            <input type="email" placeholder="Correo" name="email" value={formData.email} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300  rounded" required />
+
+            <input type="password" placeholder="Contraseña" name="password" value={formData.password} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+            <input type="tel" placeholder="Teléfono" name="phone" value={formData.phone} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row md:gap-5 border border-gray-200 p-5 mb-3">
+          <input type="text" placeholder="País" name="country" value={formData.country} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+          <input type="text" placeholder="Departamento" name="department" value={formData.department} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300 rounded" required />
+          <input type="text" placeholder="Distrito" name="district" value={formData.district} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300  rounded" required />
+        </div>
 
         {role === "tecnico" && (
           <>
-            <input type="text" placeholder="Especialidad" name="specialty" value={formData.specialty} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
-            <input type="text" placeholder="Empresa" name="company" value={formData.company} onChange={handleChange} className="w-full mb-3 p-2 border rounded" required />
+            <div className="flex flex-col md:flex-row md:gap-5 border border-gray-200 p-5 mb-3">
+              <input type="text" placeholder="Especialidad" name="specialty" value={formData.specialty} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300  rounded" required />
+              <input type="text" placeholder="Empresa" name="company" value={formData.company} onChange={handleChange} className="w-full mb-3 p-2 border border-gray-300  rounded" required />
+            </div>
           </>
         )}
-
-        {/* Foto opcional */}
-        <div className="mb-3">
-          <label className="block mb-1">Foto (opcional)</label>
-          <input type="file" name="photo" onChange={handleChange} accept="image/*" />
-          {preview && <img src={preview} alt="Previsualización" className="mt-2 w-32 h-32 object-cover rounded border" />}
-        </div>
-
         <div className="flex items-center mb-4">
           <input type="checkbox" name="agree" checked={formData.agree} onChange={handleChange} className="mr-2" />
           <label>Acepto la privacidad y uso de datos</label>
         </div>
 
-        <button className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+        <button className="w-full bg-[var(--color-principal)] text-white p-2 rounded hover:bg-[var(--color-principal-hover)]">
           Pagar Plan
         </button>
       </form>

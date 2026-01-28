@@ -57,14 +57,14 @@ export default function Login() {
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        <button className="w-full bg-[var(--color-principal)] text-white p-2 rounded hover:bg-[var(--color-principal-hover)]">
           Iniciar sesión
         </button>
 
         <p className="mt-4 text-center text-sm">
           ¿No tienes cuenta?{" "}
           <span
-            className="text-green-500 cursor-pointer"
+            className="text-[var(--color-principal)] hover:text-[var(--color-principal-hover)] underline  cursor-pointer"
             onClick={() => navigate("/register")}
           >
             Crear cuenta

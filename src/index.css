@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+:root {
+  --color-principal: rgb(77, 177, 187);
+  --color-principal-hover: rgb(37, 148, 158);
+  --color-negro: #000000;
+  --color-blanco: #ffffff;
+}
 html,
 body {
   margin: 0;
