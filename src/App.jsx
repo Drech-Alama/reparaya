@@ -15,6 +15,8 @@ import Dashboard from "./pages/technician/Dashboard";
 
 // Vista pública
 import FrontPage from "./pages/web/FrontPage";
+import PromotionView from "./pages/customer/PromotionView";
+import TechnicianView from "./pages/customer/TechnicianView";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
       <Route path="/payment" element={<Payment />} />
       <Route path="/home" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/promociones" element={<PromotionView/>} />
+      <Route path="/tecnicos" element={<TechnicianView/>} />
 
       {/* Ruta catch-all: cualquier URL no definida redirige al inicio */}
       <Route path="*" element={<FrontPage />} />

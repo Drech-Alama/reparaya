@@ -1,53 +1,226 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import TechnicianHeader from "../../components/TechnicianHeader";
+import { useState } from "react";
+import TechnicianCard from "../../components/TechnicianCard";
+import PromotionCard from "../../components/PromotionCard";
+
 
 export default function Dashboard() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const fullUser = users.find(u => u.email === currentUser.email);
 
-  useEffect(() => {
-    // Leer usuario logueado desde localStorage
-    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-    if (!currentUser.email || currentUser.role !== "tecnico") {
-      // Si no hay usuario o no es técnico, redirigir al login
-      navigate("/login");
+  // Data de Técnicos
+  const [form, setForm] = useState({
+    company: "",
+    technicianName: "",
+    address: "",
+    whatsapp: "",
+    image: null,
+  });
+
+  const [preview, setPreview] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    if (name === "image") {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setForm({ ...form, image: reader.result });
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     } else {
-      setUser(currentUser);
+      setForm({ ...form, [name]: value });
     }
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    navigate("/login");
   };
 
-  if (!user) {
-    return <p className="p-4 text-center">Cargando...</p>;
+  const handleSave = () => {
+    const technicians =
+      JSON.parse(localStorage.getItem("technicians")) || [];
+
+    technicians.push(form);
+    localStorage.setItem("technicians", JSON.stringify(technicians));
+
+    alert("Tarjeta creada ✅");
+  };
+
+  // Data Promociones
+const [promoForm, setPromoForm] = useState({
+  title: "",
+  description: "",
+  image: null,
+});
+
+const [promoPreview, setPromoPreview] = useState(null);
+
+const handlePromoChange = (e) => {
+  const { name, value, files } = e.target;
+
+  if (name === "image") {
+    const file = files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPromoForm({ ...promoForm, image: reader.result });
+      setPromoPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    setPromoForm({ ...promoForm, [name]: value });
+  }
+};
+
+const handlePromoSave = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser) {
+    alert("Debes iniciar sesión");
+    return;
   }
 
+  if (!promoForm.title || !promoForm.description || !promoForm.image) {
+    alert("Completa todos los campos");
+    return;
+  }
+
+  const promotions =
+    JSON.parse(localStorage.getItem("promotions")) || [];
+
+  promotions.push({
+    ...promoForm,
+    technicianEmail: currentUser.email,
+    id: Date.now(),
+  });
+
+  localStorage.setItem("promotions", JSON.stringify(promotions));
+
+  setPromoForm({ title: "", description: "", image: null });
+  setPromoPreview(null);
+
+  alert("Promoción creada 🎉");
+};
+
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-      <h2 className="text-2xl font-black pb-5">Página de técnico</h2>
-      {/* Foto y nombre */}
-      {user.photo && (
-        <img
-          src={user.photo}
-          alt="Foto del Técnico"
-          className="w-32 h-32 rounded-full object-cover mb-4 border-2 border-gray-300"
-        />
-      )}
-      <h1 className="text-3xl font-bold mb-2">{user.fullName}</h1>
-      <p className="text-gray-600 mb-6">{user.email}</p>
+    <>
+      <TechnicianHeader user={fullUser || currentUser} />
+      {/* contenido del técnico */}
+      {/* Formulario Técnicos */}
+      <div className="grid md:grid-cols-2 gap-8 p-6">
+        {/* FORM */}
+        <div className="bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-bold mb-4">Perfil del Técnico</h2>
 
-      {/* Botón de cerrar sesión */}
-      <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-      >
-        Cerrar sesión
-      </button>
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="mb-3"
+          />
 
-      {/* Aquí puedes agregar el resto del dashboard del técnico */}
-    </div>
+          <input
+            name="company"
+            placeholder="Nombre de la empresa"
+            onChange={handleChange}
+            className="input"
+          />
+          <input
+            name="technicianName"
+            placeholder="Nombre del técnico"
+            onChange={handleChange}
+            className="input"
+          />
+          <input
+            name="address"
+            placeholder="Dirección del local"
+            onChange={handleChange}
+            className="input"
+          />
+          <input
+            name="whatsapp"
+            placeholder="WhatsApp (51999999999)"
+            onChange={handleChange}
+            className="input"
+          />
+
+          <button
+            onClick={handleSave}
+            className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
+          >
+            Guardar
+          </button>
+        </div>
+
+        {/* PREVIEW */}
+        <div>
+          <h2 className="font-bold mb-3">Previsualización</h2>
+
+          {form.company && (
+            <TechnicianCard
+              tech={{
+                ...form,
+                image: preview || "https://via.placeholder.com/150",
+              }}
+            />
+          )}
+        </div>
+      </div>
+      {/* Formulario Promociones */}
+
+      <div className="grid md:grid-cols-2 gap-8 p-6 mt-10">
+  {/* FORM */}
+  <div className="bg-white p-6 rounded shadow">
+    <h2 className="text-xl font-bold mb-4">Crear Promoción</h2>
+
+    <input
+      type="file"
+      name="image"
+      onChange={handlePromoChange}
+      className="mb-3"
+    />
+
+    <input
+      name="title"
+      placeholder="Nombre de la promoción"
+      value={promoForm.title}
+      onChange={handlePromoChange}
+      className="input"
+    />
+
+    <textarea
+      name="description"
+      placeholder="Descripción de la promoción"
+      value={promoForm.description}
+      onChange={handlePromoChange}
+      className="input h-24"
+    />
+
+    <button
+      onClick={handlePromoSave}
+      className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
+    >
+      Guardar promoción
+    </button>
+  </div>
+
+  {/* PREVIEW */}
+  <div>
+    <h2 className="font-bold mb-3">Previsualización</h2>
+
+    {promoForm.title && (
+      <PromotionCard
+        promo={{
+          ...promoForm,
+          image: promoPreview || "/placeholder-promo.png",
+        }}
+      />
+    )}
+  </div>
+</div>
+
+    </>
   );
 }

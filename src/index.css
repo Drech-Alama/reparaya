@@ -30,3 +30,7 @@ body {
   pointer-events: auto;
 }
 
+
+.input {
+  @apply w-full mb-3 p-2 border rounded;
+}
