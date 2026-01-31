@@ -17,6 +17,7 @@ import Dashboard from "./pages/technician/Dashboard";
 import FrontPage from "./pages/web/FrontPage";
 import PromotionView from "./pages/customer/PromotionView";
 import TechnicianView from "./pages/customer/TechnicianView";
+import HistorialView from "./pages/customer/HistorialView";
 
 function App() {
   return (
@@ -25,10 +26,11 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/promociones" element={<PromotionView/>} />
+      <Route path="/inicio" element={<Home />} />
       <Route path="/tecnicos" element={<TechnicianView/>} />
+      <Route path="/promociones" element={<PromotionView/>} />
+      <Route path="/historial" element={<HistorialView/>} />
+      <Route path="/dashboard" element={<Dashboard />} />
 
       {/* Ruta catch-all: cualquier URL no definida redirige al inicio */}
       <Route path="*" element={<FrontPage />} />

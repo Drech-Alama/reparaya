@@ -1,28 +1,22 @@
-import { Tag } from "lucide-react";
-
-export default function PromotionCard({ promo, onClick }) {
+export default function PromotionCard({ promo }) {
   return (
     <div
-      onClick={onClick}
-      className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition"
+      onClick={() => {
+        console.log("Promo clickeada:", promo);
+      }}
+      className="bg-white rounded-xl shadow-md overflow-hidden
+        cursor-pointer transition hover:shadow-xl hover:scale-[1.01]"
     >
-      {/* IMAGEN */}
-      <div className="h-48 w-full">
-        <img
-          src={promo.image}
-          alt={promo.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
+      <img
+        src={promo.image}
+        alt={promo.title}
+        className="w-full h-48 object-cover"
+      />
 
-      {/* CONTENIDO */}
       <div className="p-4">
-        <div className="flex items-center gap-2 text-[var(--color-principal)] mb-2">
-          <Tag size={18} />
-          <h3 className="font-bold text-lg">{promo.title}</h3>
-        </div>
+        <h3 className="font-bold text-lg">{promo.title}</h3>
 
-        <p className="text-gray-600 text-sm line-clamp-3">
+        <p className="text-gray-600 text-sm mt-2">
           {promo.description}
         </p>
       </div>

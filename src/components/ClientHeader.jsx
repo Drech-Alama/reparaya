@@ -20,6 +20,14 @@ export default function ClientHeader({ user }) {
     navigate("/");
   };
 
+  // 👉 FOTO TOLERANTE A DISTINTOS NOMBRES
+  const photo =
+    user?.photo ||
+    user?.avatar ||
+    user?.image ||
+    user?.foto ||
+    "/images/avatar-default.png"; // avatar por defecto
+
   const links = [
     { to: "/inicio", label: "Inicio", icon: Home },
     { to: "/promociones", label: "Promociones", icon: Tag },
@@ -28,9 +36,10 @@ export default function ClientHeader({ user }) {
   ];
 
   return (
-    <header className="w-full bg-[var(--color-principal)] text-white shadow">
+    <header className="fixed top-0 left-0 w-full bg-[var(--color-principal)] text-white shadow z-50">
       {/* CONTENEDOR */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        
         {/* LOGO */}
         <div className="flex items-center gap-3">
           <img
@@ -55,16 +64,14 @@ export default function ClientHeader({ user }) {
           ))}
         </nav>
 
-        {/* PERFIL + LOGOUT (DESKTOP) */}
+        {/* PERFIL + LOGOUT DESKTOP */}
         <div className="hidden md:flex items-center gap-4">
           <div className="flex items-center gap-2">
-            {user?.photo && (
-              <img
-                src={user.photo}
-                alt="Perfil"
-                className="w-9 h-9 rounded-full object-cover border"
-              />
-            )}
+            <img
+              src={photo}
+              alt="Perfil"
+              className="w-9 h-9 rounded-full object-cover border border-white"
+            />
             <span className="font-semibold text-sm">
               Hola, {user?.fullName || user?.username || user?.email}
             </span>
@@ -79,7 +86,7 @@ export default function ClientHeader({ user }) {
           </button>
         </div>
 
-        {/* BOTÓN HAMBURGUESA (MOBILE) */}
+        {/* BOTÓN HAMBURGUESA */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden"
@@ -104,15 +111,13 @@ export default function ClientHeader({ user }) {
               </NavLink>
             ))}
 
-            {/* PERFIL */}
+            {/* PERFIL MOBILE */}
             <div className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3">
-              {user?.photo && (
-                <img
-                  src={user.photo}
-                  alt="Perfil"
-                  className="w-9 h-9 rounded-full object-cover border"
-                />
-              )}
+              <img
+                src={photo}
+                alt="Perfil"
+                className="w-9 h-9 rounded-full object-cover border border-white"
+              />
               <span className="text-sm font-semibold">
                 Hola, {user?.fullName || user?.username || user?.email}
               </span>

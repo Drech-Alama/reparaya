@@ -2,7 +2,7 @@ import TechnicianHeader from "../../components/TechnicianHeader";
 import { useState } from "react";
 import TechnicianCard from "../../components/TechnicianCard";
 import PromotionCard from "../../components/PromotionCard";
-
+import HistorialCard from "../../components/HistorialCard";
 
 export default function Dashboard() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -17,6 +17,14 @@ export default function Dashboard() {
     whatsapp: "",
     image: null,
   });
+
+  // Datos de tabla de Historial
+  const [maintenanceForm, setMaintenanceForm] = useState({
+  date: "",
+  workshop: "",
+  problem: "",
+  status: "Pendiente",
+});
 
   const [preview, setPreview] = useState(null);
 
@@ -47,60 +55,99 @@ export default function Dashboard() {
   };
 
   // Data Promociones
-const [promoForm, setPromoForm] = useState({
-  title: "",
-  description: "",
-  image: null,
-});
+  const [promoForm, setPromoForm] = useState({
+    title: "",
+    description: "",
+    image: null,
+  });
 
-const [promoPreview, setPromoPreview] = useState(null);
+  const [promoPreview, setPromoPreview] = useState(null);
 
-const handlePromoChange = (e) => {
-  const { name, value, files } = e.target;
+  const handlePromoChange = (e) => {
+    const { name, value, files } = e.target;
 
-  if (name === "image") {
-    const file = files[0];
-    if (!file) return;
+    if (name === "image") {
+      const file = files[0];
+      if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPromoForm({ ...promoForm, image: reader.result });
-      setPromoPreview(reader.result);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    setPromoForm({ ...promoForm, [name]: value });
-  }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPromoForm({ ...promoForm, image: reader.result });
+        setPromoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPromoForm({ ...promoForm, [name]: value });
+    }
+  };
+
+  const handlePromoSave = () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!currentUser) {
+      alert("Debes iniciar sesión");
+      return;
+    }
+
+    if (!promoForm.title || !promoForm.description || !promoForm.image) {
+      alert("Completa todos los campos");
+      return;
+    }
+
+    const promotions =
+      JSON.parse(localStorage.getItem("promotions")) || [];
+
+    promotions.push({
+      ...promoForm,
+      technicianEmail: currentUser.email,
+      whatsapp: fullUser?.whatsapp || form.whatsapp,
+      id: Date.now(),
+    });
+
+    localStorage.setItem("promotions", JSON.stringify(promotions));
+
+    setPromoForm({ title: "", description: "", image: null });
+    setPromoPreview(null);
+
+    alert("Promoción creada 🎉");
+  };
+
+  // Datos de Tabla historial
+  const handleMaintenanceChange = (e) => {
+  setMaintenanceForm({
+    ...maintenanceForm,
+    [e.target.name]: e.target.value,
+  });
 };
 
-const handlePromoSave = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (!currentUser) {
-    alert("Debes iniciar sesión");
-    return;
-  }
-
-  if (!promoForm.title || !promoForm.description || !promoForm.image) {
+const handleMaintenanceSave = () => {
+  if (
+    !maintenanceForm.date ||
+    !maintenanceForm.workshop ||
+    !maintenanceForm.problem
+  ) {
     alert("Completa todos los campos");
     return;
   }
 
-  const promotions =
-    JSON.parse(localStorage.getItem("promotions")) || [];
+  const historial = JSON.parse(localStorage.getItem("historial")) || [];
 
-  promotions.push({
-    ...promoForm,
-    technicianEmail: currentUser.email,
+  historial.push({
+    ...maintenanceForm,
     id: Date.now(),
+    technicianEmail: fullUser?.email || currentUser.email,
   });
 
-  localStorage.setItem("promotions", JSON.stringify(promotions));
+  localStorage.setItem("historial", JSON.stringify(historial));
 
-  setPromoForm({ title: "", description: "", image: null });
-  setPromoPreview(null);
+  setMaintenanceForm({
+    date: "",
+    workshop: "",
+    problem: "",
+    status: "Pendiente",
+  });
 
-  alert("Promoción creada 🎉");
+  alert("Mantenimiento registrado ✅");
 };
 
 
@@ -171,55 +218,120 @@ const handlePromoSave = () => {
       {/* Formulario Promociones */}
 
       <div className="grid md:grid-cols-2 gap-8 p-6 mt-10">
-  {/* FORM */}
+        {/* FORM */}
+        <div className="bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-bold mb-4">Crear Promoción</h2>
+
+          <input
+            type="file"
+            name="image"
+            onChange={handlePromoChange}
+            className="mb-3"
+          />
+
+          <input
+            name="title"
+            placeholder="Nombre de la promoción"
+            value={promoForm.title}
+            onChange={handlePromoChange}
+            className="input"
+          />
+
+          <textarea
+            name="description"
+            placeholder="Descripción de la promoción"
+            value={promoForm.description}
+            onChange={handlePromoChange}
+            className="input h-24"
+          />
+
+          <button
+            onClick={handlePromoSave}
+            className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
+          >
+            Guardar promoción
+          </button>
+        </div>
+
+        {/* PREVIEW */}
+        <div>
+          <h2 className="font-bold mb-3">Previsualización</h2>
+
+          {promoForm.title && (
+            <PromotionCard
+              promo={{
+                ...promoForm,
+                image: promoPreview || "/placeholder-promo.png",
+              }}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Formulario de Tabla Historial */}
+      {/* FORMULARIO HISTORIAL DE MANTENIMIENTO */}
+<div className="grid md:grid-cols-2 gap-8 p-6 mt-10">
+  {/* FORMULARIO */}
   <div className="bg-white p-6 rounded shadow">
-    <h2 className="text-xl font-bold mb-4">Crear Promoción</h2>
+    <h2 className="text-xl font-bold mb-4">
+      Registrar Mantenimiento
+    </h2>
 
     <input
-      type="file"
-      name="image"
-      onChange={handlePromoChange}
-      className="mb-3"
+      type="date"
+      name="date"
+      value={maintenanceForm.date}
+      onChange={handleMaintenanceChange}
+      className="input"
     />
 
     <input
-      name="title"
-      placeholder="Nombre de la promoción"
-      value={promoForm.title}
-      onChange={handlePromoChange}
+      type="text"
+      name="workshop"
+      placeholder="Taller"
+      value={maintenanceForm.workshop}
+      onChange={handleMaintenanceChange}
       className="input"
     />
 
     <textarea
-      name="description"
-      placeholder="Descripción de la promoción"
-      value={promoForm.description}
-      onChange={handlePromoChange}
+      name="problem"
+      placeholder="Problema del celular"
+      value={maintenanceForm.problem}
+      onChange={handleMaintenanceChange}
       className="input h-24"
     />
 
+    <select
+      name="status"
+      value={maintenanceForm.status}
+      onChange={handleMaintenanceChange}
+      className="input"
+    >
+      <option>Pendiente</option>
+      <option>En proceso</option>
+      <option>Reparado</option>
+    </select>
+
     <button
-      onClick={handlePromoSave}
+      onClick={handleMaintenanceSave}
       className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
     >
-      Guardar promoción
+      Guardar mantenimiento
     </button>
   </div>
 
-  {/* PREVIEW */}
+  {/* PREVISUALIZACIÓN */}
   <div>
-    <h2 className="font-bold mb-3">Previsualización</h2>
+    <h2 className="font-bold mb-3">
+      Previsualización
+    </h2>
 
-    {promoForm.title && (
-      <PromotionCard
-        promo={{
-          ...promoForm,
-          image: promoPreview || "/placeholder-promo.png",
-        }}
-      />
-    )}
+    <HistorialCard item={maintenanceForm} />
   </div>
 </div>
+
+
 
     </>
   );
