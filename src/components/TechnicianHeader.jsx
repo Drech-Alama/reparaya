@@ -5,26 +5,30 @@ import {
   X,
   Home,
   Wrench,
-  CalendarDays,
   ClipboardList,
   LogOut,
+  Tag,
+  History,
 } from "lucide-react";
 import logo from "../assets/images/logoReparaYa.png";
 
-export default function TechnicianHeader({ user }) {
+export default function TechnicianHeader() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
-    navigate("/");
+    navigate("/login");
   };
 
   const links = [
-    { to: "/dashboard", label: "Inicio", icon: Home },
-    { to: "/servicios", label: "Servicios", icon: Wrench },
-    { to: "/agenda", label: "Agenda", icon: CalendarDays },
-    { to: "/historial", label: "Historial", icon: ClipboardList },
+    { to: "/dashboard", label: "Dashboard", icon: Home },
+    { to: "/inicio", label: "Inicio", icon: Home },
+    { to: "/promociones", label: "Promociones", icon: Tag },
+    { to: "/tecnicos", label: "Técnicos", icon: Wrench },
+    { to: "/historial", label: "Historial", icon: History },
   ];
 
   return (
@@ -32,7 +36,10 @@ export default function TechnicianHeader({ user }) {
       {/* CONTENEDOR */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* LOGO */}
-        <div className="flex items-center gap-3">
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate("/dashboard")}
+        >
           <img
             src={logo}
             alt="Logo"
@@ -47,7 +54,9 @@ export default function TechnicianHeader({ user }) {
               key={to}
               to={to}
               className={({ isActive }) =>
-                isActive ? "underline" : "hover:opacity-80"
+                isActive
+                  ? "underline underline-offset-4"
+                  : "hover:opacity-80"
               }
             >
               {label}
@@ -55,7 +64,7 @@ export default function TechnicianHeader({ user }) {
           ))}
         </nav>
 
-        {/* PERFIL + LOGOUT (DESKTOP) */}
+        {/* PERFIL + LOGOUT DESKTOP */}
         <div className="hidden md:flex items-center gap-4">
           <div className="flex items-center gap-2">
             {user?.photo && (
@@ -72,18 +81,15 @@ export default function TechnicianHeader({ user }) {
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-1 bg-[var(--color-principal-hover)] px-3 py-1.5 rounded hover:bg-white hover:text-[var(--color-principal)] text-sm shadow-sm transition cursor-pointer"
+            className="flex items-center gap-1 bg-[var(--color-principal-hover)] px-3 py-1.5 rounded hover:bg-white hover:text-[var(--color-principal)] text-sm shadow-sm transition"
           >
             <LogOut size={16} />
             Salir
           </button>
         </div>
 
-        {/* BOTÓN HAMBURGUESA (MOBILE) */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden"
-        >
+        {/* HAMBURGUESA */}
+        <button onClick={() => setOpen(!open)} className="md:hidden">
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
@@ -97,7 +103,11 @@ export default function TechnicianHeader({ user }) {
                 key={to}
                 to={to}
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 py-2 hover:bg-white/10 rounded"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 py-2 rounded ${
+                    isActive ? "bg-white/20" : "hover:bg-white/10"
+                  }`
+                }
               >
                 <Icon size={18} />
                 {label}
@@ -118,10 +128,10 @@ export default function TechnicianHeader({ user }) {
               </span>
             </div>
 
-            {/* LOGOUT MOBILE */}
+            {/* LOGOUT */}
             <button
               onClick={handleLogout}
-              className="mt-3 flex items-center gap-2 bg-[var(--color-principal-hover)] px-3 py-2 rounded hover:bg-white hover:text-[var(--color-principal)] shadow-sm text-sm transition cursor-pointer"
+              className="mt-3 flex items-center gap-2 bg-[var(--color-principal-hover)] px-3 py-2 rounded hover:bg-white hover:text-[var(--color-principal)] shadow-sm text-sm transition"
             >
               <LogOut size={18} />
               Cerrar sesión

@@ -20,11 +20,11 @@ export default function Dashboard() {
 
   // Datos de tabla de Historial
   const [maintenanceForm, setMaintenanceForm] = useState({
-  date: "",
-  workshop: "",
-  problem: "",
-  status: "Pendiente",
-});
+    date: "",
+    workshop: "",
+    problem: "",
+    status: "Pendiente",
+  });
 
   const [preview, setPreview] = useState(null);
 
@@ -55,11 +55,13 @@ export default function Dashboard() {
   };
 
   // Data Promociones
-  const [promoForm, setPromoForm] = useState({
-    title: "",
-    description: "",
-    image: null,
-  });
+const [promoForm, setPromoForm] = useState({
+  company: "",
+  title: "",
+  description: "",
+  whatsapp: "",
+  image: null,
+});
 
   const [promoPreview, setPromoPreview] = useState(null);
 
@@ -82,73 +84,86 @@ export default function Dashboard() {
   };
 
   const handlePromoSave = () => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (!currentUser) {
-      alert("Debes iniciar sesión");
-      return;
-    }
+  if (!currentUser) {
+    alert("Debes iniciar sesión");
+    return;
+  }
 
-    if (!promoForm.title || !promoForm.description || !promoForm.image) {
-      alert("Completa todos los campos");
-      return;
-    }
-
-    const promotions =
-      JSON.parse(localStorage.getItem("promotions")) || [];
-
-    promotions.push({
-      ...promoForm,
-      technicianEmail: currentUser.email,
-      whatsapp: fullUser?.whatsapp || form.whatsapp,
-      id: Date.now(),
-    });
-
-    localStorage.setItem("promotions", JSON.stringify(promotions));
-
-    setPromoForm({ title: "", description: "", image: null });
-    setPromoPreview(null);
-
-    alert("Promoción creada 🎉");
-  };
-
-  // Datos de Tabla historial
-  const handleMaintenanceChange = (e) => {
-  setMaintenanceForm({
-    ...maintenanceForm,
-    [e.target.name]: e.target.value,
-  });
-};
-
-const handleMaintenanceSave = () => {
   if (
-    !maintenanceForm.date ||
-    !maintenanceForm.workshop ||
-    !maintenanceForm.problem
+    !promoForm.company ||
+    !promoForm.title ||
+    !promoForm.description ||
+    !promoForm.image ||
+    !promoForm.whatsapp
   ) {
     alert("Completa todos los campos");
     return;
   }
 
-  const historial = JSON.parse(localStorage.getItem("historial")) || [];
+  const promotions =
+    JSON.parse(localStorage.getItem("promotions")) || [];
 
-  historial.push({
-    ...maintenanceForm,
+  promotions.push({
+    ...promoForm,
+    technicianEmail: currentUser.email,
     id: Date.now(),
-    technicianEmail: fullUser?.email || currentUser.email,
   });
 
-  localStorage.setItem("historial", JSON.stringify(historial));
+  localStorage.setItem("promotions", JSON.stringify(promotions));
 
-  setMaintenanceForm({
-    date: "",
-    workshop: "",
-    problem: "",
-    status: "Pendiente",
+  setPromoForm({
+    company: "",
+    title: "",
+    description: "",
+    whatsapp: "",
+    image: null,
   });
 
-  alert("Mantenimiento registrado ✅");
+  setPromoPreview(null);
+
+  alert("Promoción creada 🎉");
 };
+
+
+  // Datos de Tabla historial
+  const handleMaintenanceChange = (e) => {
+    setMaintenanceForm({
+      ...maintenanceForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleMaintenanceSave = () => {
+    if (
+      !maintenanceForm.date ||
+      !maintenanceForm.workshop ||
+      !maintenanceForm.problem
+    ) {
+      alert("Completa todos los campos");
+      return;
+    }
+
+    const historial = JSON.parse(localStorage.getItem("historial")) || [];
+
+    historial.push({
+      ...maintenanceForm,
+      id: Date.now(),
+      technicianEmail: fullUser?.email || currentUser.email,
+    });
+
+    localStorage.setItem("historial", JSON.stringify(historial));
+
+    setMaintenanceForm({
+      date: "",
+      workshop: "",
+      problem: "",
+      status: "Pendiente",
+    });
+
+    alert("Mantenimiento registrado ✅");
+  };
 
 
   return (
@@ -222,6 +237,7 @@ const handleMaintenanceSave = () => {
         <div className="bg-white p-6 rounded shadow">
           <h2 className="text-xl font-bold mb-4">Crear Promoción</h2>
 
+
           <input
             type="file"
             name="image"
@@ -230,12 +246,27 @@ const handleMaintenanceSave = () => {
           />
 
           <input
+            name="company"
+            placeholder="Nombre de la empresa"
+            value={promoForm.company}
+            onChange={handlePromoChange}
+            className="input"
+          />
+          <input
             name="title"
             placeholder="Nombre de la promoción"
             value={promoForm.title}
             onChange={handlePromoChange}
             className="input"
           />
+          <input
+  name="whatsapp"
+  placeholder="WhatsApp (ej: 51999999999)"
+  value={promoForm.whatsapp}
+  onChange={handlePromoChange}
+  className="input"
+/>
+
 
           <textarea
             name="description"
@@ -266,70 +297,70 @@ const handleMaintenanceSave = () => {
             />
           )}
         </div>
-      </div>
+        </div> {/* 👈 CIERRA grid de promociones */}
 
       {/* Formulario de Tabla Historial */}
       {/* FORMULARIO HISTORIAL DE MANTENIMIENTO */}
-<div className="grid md:grid-cols-2 gap-8 p-6 mt-10">
-  {/* FORMULARIO */}
-  <div className="bg-white p-6 rounded shadow">
-    <h2 className="text-xl font-bold mb-4">
-      Registrar Mantenimiento
-    </h2>
+      <div className="grid md:grid-cols-2 gap-8 p-6 mt-10">
+        {/* FORMULARIO */}
+        <div className="bg-white p-6 rounded shadow">
+          <h2 className="text-xl font-bold mb-4">
+            Registrar Mantenimiento
+          </h2>
 
-    <input
-      type="date"
-      name="date"
-      value={maintenanceForm.date}
-      onChange={handleMaintenanceChange}
-      className="input"
-    />
+          <input
+            type="date"
+            name="date"
+            value={maintenanceForm.date}
+            onChange={handleMaintenanceChange}
+            className="input"
+          />
 
-    <input
-      type="text"
-      name="workshop"
-      placeholder="Taller"
-      value={maintenanceForm.workshop}
-      onChange={handleMaintenanceChange}
-      className="input"
-    />
+          <input
+            type="text"
+            name="workshop"
+            placeholder="Taller"
+            value={maintenanceForm.workshop}
+            onChange={handleMaintenanceChange}
+            className="input"
+          />
 
-    <textarea
-      name="problem"
-      placeholder="Problema del celular"
-      value={maintenanceForm.problem}
-      onChange={handleMaintenanceChange}
-      className="input h-24"
-    />
+          <textarea
+            name="problem"
+            placeholder="Problema del celular"
+            value={maintenanceForm.problem}
+            onChange={handleMaintenanceChange}
+            className="input h-24"
+          />
 
-    <select
-      name="status"
-      value={maintenanceForm.status}
-      onChange={handleMaintenanceChange}
-      className="input"
-    >
-      <option>Pendiente</option>
-      <option>En proceso</option>
-      <option>Reparado</option>
-    </select>
+          <select
+            name="status"
+            value={maintenanceForm.status}
+            onChange={handleMaintenanceChange}
+            className="input"
+          >
+            <option>Pendiente</option>
+            <option>En proceso</option>
+            <option>Reparado</option>
+          </select>
 
-    <button
-      onClick={handleMaintenanceSave}
-      className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
-    >
-      Guardar mantenimiento
-    </button>
-  </div>
+          <button
+            onClick={handleMaintenanceSave}
+            className="mt-4 w-full bg-[var(--color-principal)] text-white py-2 rounded"
+          >
+            Guardar mantenimiento
+          </button>
+        </div>
 
-  {/* PREVISUALIZACIÓN */}
-  <div>
-    <h2 className="font-bold mb-3">
-      Previsualización
-    </h2>
+        {/* PREVISUALIZACIÓN */}
+        <div>
+          <h2 className="font-bold mb-3">
+            Previsualización
+          </h2>
 
-    <HistorialCard item={maintenanceForm} />
-  </div>
-</div>
+          <HistorialCard item={maintenanceForm} />
+        </div>
+      </div>
 
 
 

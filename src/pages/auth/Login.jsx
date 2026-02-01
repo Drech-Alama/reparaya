@@ -26,11 +26,9 @@ export default function Login() {
     // Guardar usuario logueado en localStorage para persistencia
     localStorage.setItem("currentUser", JSON.stringify(user));
 
-    // Redirigir según rol
-    if (user.role === "cliente") navigate("/home");
+    if (user.role === "cliente") navigate("/inicio");
     else if (user.role === "tecnico") navigate("/dashboard");
-  };
-
+  }
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <form
