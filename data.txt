@@ -1,0 +1,26 @@
+CLIENTE
+Nombres y apellidos
+Nombre de usuario
+Correo
+Teléfono
+Pais
+Departamento
+Distrito
+Check Privacidad y uso de datos
+Boton de pagar plan
+
+
+TECNICO
+Nombres y apellidos
+Nombre de usuario
+Correo
+Teléfono
+Pais
+Departamento
+Distrito
+Especialidad
+Empresa
+Check Privacidad y uso de datos
+Boton de pagar plan
+
+
