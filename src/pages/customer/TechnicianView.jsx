@@ -19,6 +19,7 @@ export default function TechniciansList() {
 
       {/* CONTENIDO */}
       <div className="max-w-7xl mx-auto p-6 pt-24">
+        
         {technicians.length === 0 ? (
           <p className="text-gray-500">
             No hay técnicos registrados aún
