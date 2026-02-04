@@ -26,7 +26,7 @@ export default function ClientHeader({ user }) {
     user?.avatar ||
     user?.image ||
     user?.foto ||
-    "/images/avatar-default.png"; // avatar por defecto
+    "/images/avatar-default.png";
 
   const links = [
     { to: "/inicio", label: "Inicio", icon: Home },
@@ -35,13 +35,20 @@ export default function ClientHeader({ user }) {
     { to: "/historial", label: "Historial", icon: History },
   ];
 
+  const goToRegister = () => {
+    navigate("/editar-plan");
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full bg-[var(--color-principal)] text-white shadow z-50">
       {/* CONTENEDOR */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         
         {/* LOGO */}
-        <div className="flex items-center gap-3">
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate("/inicio")}
+        >
           <img
             src={logo}
             alt="Logo"
@@ -66,7 +73,11 @@ export default function ClientHeader({ user }) {
 
         {/* PERFIL + LOGOUT DESKTOP */}
         <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          {/* PERFIL (click → register) */}
+          <div
+            onClick={goToRegister}
+            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
+          >
             <img
               src={photo}
               alt="Perfil"
@@ -77,6 +88,7 @@ export default function ClientHeader({ user }) {
             </span>
           </div>
 
+          {/* LOGOUT */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-1 bg-[var(--color-principal-hover)] px-3 py-1.5 rounded hover:bg-white hover:text-[var(--color-principal)] text-sm shadow-sm transition cursor-pointer"
@@ -111,8 +123,14 @@ export default function ClientHeader({ user }) {
               </NavLink>
             ))}
 
-            {/* PERFIL MOBILE */}
-            <div className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3">
+            {/* PERFIL MOBILE (click → register) */}
+            <div
+              onClick={() => {
+                goToRegister();
+                setOpen(false);
+              }}
+              className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3 cursor-pointer hover:opacity-80 transition"
+            >
               <img
                 src={photo}
                 alt="Perfil"

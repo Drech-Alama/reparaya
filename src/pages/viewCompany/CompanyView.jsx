@@ -45,7 +45,7 @@ export default function CompanyView() {
     return (
         <>
             {/* HEADER */}
-            <ClientHeader user={user} />
+            {/* <ClientHeader user={user} /> */}
 
             {/* HERO */}
             <section className="h-72 relative">

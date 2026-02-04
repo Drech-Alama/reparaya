@@ -117,7 +117,7 @@ export default function Payment() {
 
             <button
               type="submit"
-              className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+              className="w-full bg-[var(--color-principal)] text-white p-2 rounded hover:bg-[var(--color-principal-hover)]"
             >
               Pagar con tarjeta
             </button>

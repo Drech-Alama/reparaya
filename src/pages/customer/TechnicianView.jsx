@@ -15,10 +15,10 @@ export default function TechniciansList() {
   return (
     <>
       {/* HEADER FULL WIDTH */}
-      <ClientHeader user={user} />
+      {/* <ClientHeader user={user} /> */}
 
       {/* CONTENIDO */}
-      <div className="max-w-7xl mx-auto p-6 pt-24">
+      <div className="max-w-7xl mx-auto p-6 pt-24 md:pt-28">
         
         {technicians.length === 0 ? (
           <p className="text-gray-500">

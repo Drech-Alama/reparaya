@@ -5,7 +5,6 @@ import {
   X,
   Home,
   Wrench,
-  ClipboardList,
   LogOut,
   Tag,
   History,
@@ -32,7 +31,7 @@ export default function TechnicianHeader() {
   ];
 
   return (
-    <header className="w-full bg-[var(--color-principal)] text-white shadow">
+    <header className="fixed top-0 left-0 w-full bg-[var(--color-principal)] text-white shadow z-50">
       {/* CONTENEDOR */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* LOGO */}
@@ -66,7 +65,11 @@ export default function TechnicianHeader() {
 
         {/* PERFIL + LOGOUT DESKTOP */}
         <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          {/* PERFIL */}
+          <div
+            onClick={() => navigate("/editar-plan")}
+            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
+          >
             {user?.photo && (
               <img
                 src={user.photo}
@@ -79,6 +82,7 @@ export default function TechnicianHeader() {
             </span>
           </div>
 
+          {/* LOGOUT */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-1 bg-[var(--color-principal-hover)] px-3 py-1.5 rounded hover:bg-white hover:text-[var(--color-principal)] text-sm shadow-sm transition"
@@ -114,8 +118,14 @@ export default function TechnicianHeader() {
               </NavLink>
             ))}
 
-            {/* PERFIL */}
-            <div className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3">
+            {/* PERFIL MOBILE */}
+            <div
+              onClick={() => {
+                navigate("/editar-plan");
+                setOpen(false);
+              }}
+              className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3 cursor-pointer hover:opacity-80 transition"
+            >
               {user?.photo && (
                 <img
                   src={user.photo}
@@ -128,7 +138,7 @@ export default function TechnicianHeader() {
               </span>
             </div>
 
-            {/* LOGOUT */}
+            {/* LOGOUT MOBILE */}
             <button
               onClick={handleLogout}
               className="mt-3 flex items-center gap-2 bg-[var(--color-principal-hover)] px-3 py-2 rounded hover:bg-white hover:text-[var(--color-principal)] shadow-sm text-sm transition"

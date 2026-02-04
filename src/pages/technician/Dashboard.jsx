@@ -209,10 +209,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <TechnicianHeader user={fullUser || currentUser} />
+      {/* <TechnicianHeader user={fullUser || currentUser} /> */}
       {/* contenido del técnico */}
       {/* Formulario Técnicos */}
-      <div className="grid md:grid-cols-2 gap-8 p-6">
+      <div className="grid md:grid-cols-2 gap-8 p-6 pt-24 md:pt-28">
         {/* FORM */}
         <div className="bg-white p-6 rounded shadow">
           <h2 className="text-xl font-bold mb-4">Perfil del Técnico</h2>

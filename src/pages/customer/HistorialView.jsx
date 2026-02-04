@@ -13,9 +13,9 @@ export default function HistorialView() {
 
   return (
     <>
-      <ClientHeader user={user} />
+      {/* <ClientHeader user={user} /> */}
 
-      <main className="p-6 pt-24">
+      <main className="p-6 pt-24 md:pt-28">
         <h1 className="text-2xl font-bold mb-6">
           Historial de Mantenimiento
         </h1>
