@@ -22,6 +22,7 @@ import HistorialView from "./pages/customer/HistorialView";
 import CompanyView from "./pages/viewCompany/CompanyView";
 import FormEditPlan from "./components/FormEditPlan";
 import MainLayout from "./components/MainLayout";
+import HouseGtphone from "./pages/houses/HouseGtphone";
 
 
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/historial" element={<HistorialView />} />
         <Route path="/empresa/:company" element={<CompanyView />} />
         <Route path="/editar-plan" element={<FormEditPlan />} />
+        <Route path="/houses/gtphone" element={<HouseGtphone />} />
       </Route>
 
       {/* Técnicos protegidos + header */}

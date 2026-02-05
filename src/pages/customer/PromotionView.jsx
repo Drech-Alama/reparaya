@@ -36,6 +36,7 @@ export default function PromotionView() {
           </div>
         )}
       </div>
+      
     </>
   );
 }
