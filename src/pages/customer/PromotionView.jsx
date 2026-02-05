@@ -14,9 +14,9 @@ export default function PromotionView() {
 
   return (
     <>
-      <ClientHeader user={user} />
+      {/* <ClientHeader user={user} /> */}
 
-      <div className="max-w-7xl mx-auto p-6 pt-24">
+      <div className="max-w-7xl mx-auto p-6 pt-24 md:pt-28">
         <h1 className="text-2xl font-bold mb-6">
           Promociones disponibles
         </h1>
@@ -36,6 +36,7 @@ export default function PromotionView() {
           </div>
         )}
       </div>
+      
     </>
   );
 }

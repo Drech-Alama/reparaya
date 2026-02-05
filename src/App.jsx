@@ -20,27 +20,44 @@ import PromotionView from "./pages/customer/PromotionView";
 import TechnicianView from "./pages/customer/TechnicianView";
 import HistorialView from "./pages/customer/HistorialView";
 import CompanyView from "./pages/viewCompany/CompanyView";
+import FormEditPlan from "./components/FormEditPlan";
+import MainLayout from "./components/MainLayout";
+import HouseGtphone from "./pages/houses/HouseGtphone";
+import HouseSolucionesmc from "./pages/houses/HouseSolucionesmc";
+import HouseIlucas from "./pages/houses/HouseIlucas";
+
 
 
 function App() {
   return (
     <Routes>
+
+      {/* Públicas SIN header */}
       <Route path="/" element={<FrontPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/inicio" element={<Home />} />
-      <Route path="/tecnicos" element={<TechnicianView/>} />
-      <Route path="/promociones" element={<PromotionView/>} />
-      <Route path="/historial" element={<HistorialView/>} />
-      <Route path="/empresa/:company" element={<CompanyView />} />
 
-      {/* Técnicos */}
-      <Route element={<PrivateRoute allowedRoles={["tecnico"]} />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+      {/* Rutas con header según rol */}
+      <Route element={<MainLayout />}>
+        <Route path="/inicio" element={<Home />} />
+        <Route path="/tecnicos" element={<TechnicianView />} />
+        <Route path="/promociones" element={<PromotionView />} />
+        <Route path="/historial" element={<HistorialView />} />
+        <Route path="/empresa/:company" element={<CompanyView />} />
+        <Route path="/editar-plan" element={<FormEditPlan />} />
+        <Route path="/tienda/gtphone" element={<HouseGtphone />} />
+        <Route path="/tienda/ilucas" element={<HouseIlucas />} />
+        <Route path="/tienda/solucionesmc" element={<HouseSolucionesmc />} />
       </Route>
 
-      {/* Ruta catch-all: cualquier URL no definida redirige al inicio */}
+      {/* Técnicos protegidos + header */}
+      <Route element={<PrivateRoute allowedRoles={["tecnico"]} />}>
+        <Route element={<MainLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Route>
+
       <Route path="*" element={<FrontPage />} />
     </Routes>
   );

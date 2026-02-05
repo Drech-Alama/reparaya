@@ -11,11 +11,11 @@ export default function Dashboard() {
 
   // Data de Técnicos
   const [form, setForm] = useState({
+    image: null,
     company: "",
     technicianName: "",
     address: "",
-    whatsapp: "",
-    image: null,
+    mapUrl: "",
   });
 
   // Datos de tabla de Historial
@@ -33,35 +33,78 @@ export default function Dashboard() {
 
     if (name === "image") {
       const file = files[0];
+      if (!file) return;
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        setForm({ ...form, image: reader.result });
-        setPreview(reader.result);
+        setForm(prev => ({
+          ...prev,
+          image: reader.result,
+        }));
       };
       reader.readAsDataURL(file);
     } else {
-      setForm({ ...form, [name]: value });
+      setForm(prev => ({
+        ...prev,
+        [name]: value,
+      }));
     }
   };
 
+
   const handleSave = () => {
+    if (
+      !form.company ||
+      !form.technicianName ||
+      !form.address ||
+      !form.mapUrl
+    ) {
+      alert("Completa todos los campos");
+      return;
+    }
+
     const technicians =
       JSON.parse(localStorage.getItem("technicians")) || [];
 
-    technicians.push(form);
-    localStorage.setItem("technicians", JSON.stringify(technicians));
+    technicians.push({
+      ...form,
+      id: Date.now(),
+    });
 
-    alert("Tarjeta creada ✅");
+    localStorage.setItem(
+      "technicians",
+      JSON.stringify(technicians)
+    );
+
+    setForm({
+      company: "",
+      technicianName: "",
+      address: "",
+      mapUrl: "",
+    });
+
+    alert("Técnico registrado ✅");
   };
 
+  // if (
+  //   !form.image ||
+  //   !form.company ||
+  //   !form.technicianName ||
+  //   !form.address ||
+  //   !form.mapUrl
+  // ) {
+  //   alert("Completa todos los campos");
+  //   return;
+  // }
+
+
   // Data Promociones
-const [promoForm, setPromoForm] = useState({
-  company: "",
-  title: "",
-  description: "",
-  whatsapp: "",
-  image: null,
-});
+  const [promoForm, setPromoForm] = useState({
+    company: "",
+    title: "",
+    description: "",
+    image: null,
+  });
 
   const [promoPreview, setPromoPreview] = useState(null);
 
@@ -74,57 +117,55 @@ const [promoForm, setPromoForm] = useState({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPromoForm({ ...promoForm, image: reader.result });
-        setPromoPreview(reader.result);
+        setPromoForm(prev => ({
+          ...prev,
+          image: reader.result,
+        }));
       };
       reader.readAsDataURL(file);
     } else {
-      setPromoForm({ ...promoForm, [name]: value });
+      setPromoForm(prev => ({
+        ...prev,
+        [name]: value,
+      }));
     }
   };
 
+
   const handlePromoSave = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (
+      !promoForm.title ||
+      !promoForm.company ||
+      !promoForm.description ||
+      !promoForm.image
+    ) {
+      alert("Completa todos los campos");
+      return;
+    }
 
-  if (!currentUser) {
-    alert("Debes iniciar sesión");
-    return;
-  }
+    const promotions =
+      JSON.parse(localStorage.getItem("promotions")) || [];
 
-  if (
-    !promoForm.company ||
-    !promoForm.title ||
-    !promoForm.description ||
-    !promoForm.image ||
-    !promoForm.whatsapp
-  ) {
-    alert("Completa todos los campos");
-    return;
-  }
+    promotions.push({
+      ...promoForm,
+      id: Date.now(),
+    });
 
-  const promotions =
-    JSON.parse(localStorage.getItem("promotions")) || [];
+    localStorage.setItem(
+      "promotions",
+      JSON.stringify(promotions)
+    );
 
-  promotions.push({
-    ...promoForm,
-    technicianEmail: currentUser.email,
-    id: Date.now(),
-  });
+    setPromoForm({
+      company: "",
+      title: "",
+      description: "",
+      image: null,
+    });
 
-  localStorage.setItem("promotions", JSON.stringify(promotions));
+    alert("Promoción creada 🎉");
+  };
 
-  setPromoForm({
-    company: "",
-    title: "",
-    description: "",
-    whatsapp: "",
-    image: null,
-  });
-
-  setPromoPreview(null);
-
-  alert("Promoción creada 🎉");
-};
 
 
   // Datos de Tabla historial
@@ -168,10 +209,10 @@ const [promoForm, setPromoForm] = useState({
 
   return (
     <>
-      <TechnicianHeader user={fullUser || currentUser} />
+      {/* <TechnicianHeader user={fullUser || currentUser} /> */}
       {/* contenido del técnico */}
       {/* Formulario Técnicos */}
-      <div className="grid md:grid-cols-2 gap-8 p-6">
+      <div className="grid md:grid-cols-2 gap-8 p-6 pt-24 md:pt-28">
         {/* FORM */}
         <div className="bg-white p-6 rounded shadow">
           <h2 className="text-xl font-bold mb-4">Perfil del Técnico</h2>
@@ -179,6 +220,7 @@ const [promoForm, setPromoForm] = useState({
           <input
             type="file"
             name="image"
+            accept="image/*"
             onChange={handleChange}
             className="mb-3"
           />
@@ -186,24 +228,31 @@ const [promoForm, setPromoForm] = useState({
           <input
             name="company"
             placeholder="Nombre de la empresa"
+            value={form.company}
             onChange={handleChange}
             className="input"
           />
+
           <input
             name="technicianName"
             placeholder="Nombre del técnico"
+            value={form.technicianName}
             onChange={handleChange}
             className="input"
           />
+
           <input
             name="address"
-            placeholder="Dirección del local"
+            placeholder="Dirección"
+            value={form.address}
             onChange={handleChange}
             className="input"
           />
+
           <input
-            name="whatsapp"
-            placeholder="WhatsApp (51999999999)"
+            name="mapUrl"
+            placeholder="Enlace de Google Maps"
+            value={form.mapUrl}
             onChange={handleChange}
             className="input"
           />
@@ -220,14 +269,15 @@ const [promoForm, setPromoForm] = useState({
         <div>
           <h2 className="font-bold mb-3">Previsualización</h2>
 
-          {form.company && (
+          {(form.image || form.company) && (
             <TechnicianCard
               tech={{
                 ...form,
-                image: preview || "https://via.placeholder.com/150",
+                image: form.image || "/placeholder-tech.png",
               }}
             />
           )}
+
         </div>
       </div>
       {/* Formulario Promociones */}
@@ -246,27 +296,20 @@ const [promoForm, setPromoForm] = useState({
           />
 
           <input
+            name="title"
+            placeholder="Título de la promoción"
+            value={promoForm.title}
+            onChange={handlePromoChange}
+            className="input"
+          />
+
+          <input
             name="company"
             placeholder="Nombre de la empresa"
             value={promoForm.company}
             onChange={handlePromoChange}
             className="input"
           />
-          <input
-            name="title"
-            placeholder="Nombre de la promoción"
-            value={promoForm.title}
-            onChange={handlePromoChange}
-            className="input"
-          />
-          <input
-  name="whatsapp"
-  placeholder="WhatsApp (ej: 51999999999)"
-  value={promoForm.whatsapp}
-  onChange={handlePromoChange}
-  className="input"
-/>
-
 
           <textarea
             name="description"
@@ -275,6 +318,7 @@ const [promoForm, setPromoForm] = useState({
             onChange={handlePromoChange}
             className="input h-24"
           />
+
 
           <button
             onClick={handlePromoSave}
@@ -288,16 +332,17 @@ const [promoForm, setPromoForm] = useState({
         <div>
           <h2 className="font-bold mb-3">Previsualización</h2>
 
-          {promoForm.title && (
+          {(promoForm.title || promoForm.image) && (
             <PromotionCard
               promo={{
                 ...promoForm,
-                image: promoPreview || "/placeholder-promo.png",
+                image: promoForm.image || "/placeholder-promo.png",
               }}
             />
           )}
+
         </div>
-        </div> {/* 👈 CIERRA grid de promociones */}
+      </div> {/* 👈 CIERRA grid de promociones */}
 
       {/* Formulario de Tabla Historial */}
       {/* FORMULARIO HISTORIAL DE MANTENIMIENTO */}
@@ -361,9 +406,6 @@ const [promoForm, setPromoForm] = useState({
           <HistorialCard item={maintenanceForm} />
         </div>
       </div>
-
-
-
     </>
   );
 }

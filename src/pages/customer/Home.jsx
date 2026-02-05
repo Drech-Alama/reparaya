@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <>
-      <ClientHeader user={user} />
+      {/* <ClientHeader user={user} /> */}
 
       {/* SLIDER FULLSCREEN */}
       <main
