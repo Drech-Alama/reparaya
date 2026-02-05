@@ -1,22 +1,7 @@
-import { useNavigate } from "react-router-dom";
-
-export default function PromotionCard({ promo }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (!promo.company) return;
-
-    const slug = promo.company
-      .trim()
-      .replace(/\s+/g, "-")
-      .toLowerCase();
-
-    navigate(`/empresa/${slug}`);
-  };
-
+export default function PromotionCard({ promo, onClick }) {
   return (
     <div
-      onClick={handleClick}
+      onClick={onClick} // 👈 usa la función que venga del padre
       className="cursor-pointer bg-white rounded shadow p-4 hover:scale-105 transition"
     >
       <img

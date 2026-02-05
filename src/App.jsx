@@ -44,11 +44,11 @@ function App() {
         <Route path="/tecnicos" element={<TechnicianView />} />
         <Route path="/promociones" element={<PromotionView />} />
         <Route path="/historial" element={<HistorialView />} />
-        <Route path="/empresa/:company" element={<CompanyView />} />
         <Route path="/editar-plan" element={<FormEditPlan />} />
         <Route path="/tienda/gtphone" element={<HouseGtphone />} />
         <Route path="/tienda/ilucas" element={<HouseIlucas />} />
         <Route path="/tienda/solucionesmc" element={<HouseSolucionesmc />} />
+        {/* <Route path="/empresa/:company" element={<CompanyView />} /> */}
       </Route>
 
       {/* Técnicos protegidos + header */}
