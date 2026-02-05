@@ -4,7 +4,7 @@ import ClientHeader from "../../components/ClientHeader";
 
 // 🔹 IMPORTAR IMÁGENES
 import tecnico1 from "../../assets/images/localGT.webp";
-import tecnico2 from "../../assets/images/localIlucas.webp";
+import tecnico2 from "../../assets/images/localilucas.webp";
 import tecnico3 from "../../assets/images/slider1.webp";
 
 
