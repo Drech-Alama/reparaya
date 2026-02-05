@@ -4,6 +4,7 @@ import CompanyDescription from "../../components/houseComponents/CompanyDescript
 import CompanyValues from "../../components/houseComponents/CompanyValues";
 import { Pencil } from "lucide-react";
 import WhatsappFloatingButton from "../../components/WhatsappFloatingButton";
+
 /* =====================
    STORAGE KEYS
 ===================== */
