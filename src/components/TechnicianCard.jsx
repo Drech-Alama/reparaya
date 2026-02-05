@@ -1,58 +1,39 @@
-import { useNavigate } from "react-router-dom";
-
-export default function TechnicianCard({ tech }) {
-  const navigate = useNavigate();
-
+export default function TechnicianCard({ tech, onClick }) {
   if (!tech) return null;
 
-  const handleClick = () => {
-    if (!tech.company) return;
-
-    const slug = tech.company
-      .trim()
-      .replace(/\s+/g, "-")
-      .toLowerCase();
-
-    navigate(`/tecnico/${slug}`);
-  };
+  // Siempre mostrar un mapa válido aunque no haya uno real
+  const mapSrc =
+    tech.mapUrl && tech.mapUrl.includes("/maps/embed") 
+      ? tech.mapUrl 
+      : "https://maps.google.com/maps?q=12.059624,-77.035212&z=15&output=embed";
 
   return (
     <div
-      onClick={handleClick}
+      onClick={onClick}
       className="cursor-pointer bg-white p-4 rounded shadow hover:scale-105 transition"
     >
-      {/* IMAGEN */}
       <img
         src={tech.image || "/placeholder-tech.png"}
         alt={tech.company || "Técnico"}
         className="w-full h-40 object-cover rounded mb-3"
       />
 
-      {/* EMPRESA */}
-      <h3 className="font-bold text-lg">
-        {tech.company || "Empresa sin nombre"}
-      </h3>
+      <h3 className="font-bold text-lg">{tech.company || "Empresa sin nombre"}</h3>
 
-      {/* TÉCNICO */}
       <p className="text-sm text-gray-600">
         Técnico: {tech.technicianName || "No especificado"}
       </p>
 
-      {/* DIRECCIÓN */}
       <p className="text-sm text-gray-500">
         {tech.address || "Dirección no registrada"}
       </p>
 
-      {/* MAPA */}
-      {tech.mapUrl && tech.mapUrl.includes("/maps/embed") && (
-        <iframe
-          src={tech.mapUrl}
-          className="w-full h-40 mt-3 rounded"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      )}
-
+      <iframe
+        src={mapSrc}
+        className="w-full h-40 mt-3 rounded"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
     </div>
   );
 }
