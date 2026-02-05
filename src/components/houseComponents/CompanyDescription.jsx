@@ -3,31 +3,33 @@ import { Pencil } from "lucide-react";
 
 const STORAGE_KEY = "house_company_description";
 
-export default function CompanyDescription() {
+export default function CompanyDescription({ companyKey }) {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const isTecnico = user?.role === "tecnico";
 
+  const STORAGE_KEY = `${companyKey}_description`;
+
   const [title, setTitle] = useState("Sobre nuestra empresa");
   const [description, setDescription] = useState(
-    "Somos una empresa especializada en soluciones técnicas, ofreciendo un servicio rápido, confiable y garantizado para todos nuestros clientes."
+    "Somos una empresa especializada en soluciones técnicas..."
   );
 
-  /* 🔹 Cargar */
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (saved) {
       setTitle(saved.title);
       setDescription(saved.description);
     }
-  }, []);
+  }, [STORAGE_KEY]);
 
-  /* 🔹 Guardar */
   useEffect(() => {
+    if (!isTecnico) return;
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({ title, description })
     );
-  }, [title, description]);
+  }, [title, description, isTecnico, STORAGE_KEY]);
+
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">

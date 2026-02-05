@@ -23,6 +23,8 @@ import CompanyView from "./pages/viewCompany/CompanyView";
 import FormEditPlan from "./components/FormEditPlan";
 import MainLayout from "./components/MainLayout";
 import HouseGtphone from "./pages/houses/HouseGtphone";
+import HouseSolucionesmc from "./pages/houses/HouseSolucionesmc";
+import HouseIlucas from "./pages/houses/HouseIlucas";
 
 
 
@@ -44,7 +46,9 @@ function App() {
         <Route path="/historial" element={<HistorialView />} />
         <Route path="/empresa/:company" element={<CompanyView />} />
         <Route path="/editar-plan" element={<FormEditPlan />} />
-        <Route path="/houses/gtphone" element={<HouseGtphone />} />
+        <Route path="/tienda/gtphone" element={<HouseGtphone />} />
+        <Route path="/tienda/ilucas" element={<HouseIlucas />} />
+        <Route path="/tienda/solucionesmc" element={<HouseSolucionesmc />} />
       </Route>
 
       {/* Técnicos protegidos + header */}

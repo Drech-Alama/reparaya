@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { Pencil } from "lucide-react";
 
-const STORAGE_KEY = "house_company_values";
-
 const defaultValues = [
   { id: Date.now(), text: "Atención rápida y personalizada" },
   { id: Date.now() + 1, text: "Técnicos certificados y confiables" },
   { id: Date.now() + 2, text: "Garantía en todos nuestros servicios" },
 ];
 
-export default function CompanyValues() {
+export default function CompanyValues({ storageKey }) {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const isTecnico = user?.role === "tecnico";
 
@@ -17,14 +15,17 @@ export default function CompanyValues() {
 
   /* 🔹 Cargar */
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (saved) setValues(saved);
-  }, []);
+    const saved = JSON.parse(localStorage.getItem(storageKey));
+    if (saved && saved.length) {
+      setValues(saved);
+    }
+  }, [storageKey]);
 
   /* 🔹 Guardar */
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
-  }, [values]);
+    if (!isTecnico) return;
+    localStorage.setItem(storageKey, JSON.stringify(values));
+  }, [values, isTecnico, storageKey]);
 
   const addValue = () => {
     setValues([
@@ -54,11 +55,10 @@ export default function CompanyValues() {
           {values.map((item) => (
             <div
               key={item.id}
-              className="relative bg-white rounded-xl shadow p-14 text-center"
+              className="relative bg-[var(--color-principal)] rounded-xl shadow p-14 text-center"
             >
               {isTecnico ? (
                 <>
-                  {/* TEXTO EDITABLE */}
                   <div className="flex items-start justify-center gap-3">
                     <textarea
                       value={item.text}
@@ -69,15 +69,14 @@ export default function CompanyValues() {
                       className="w-full text-center text-lg font-medium
                                  bg-transparent outline-none resize-none
                                  border-b-2 border-gray-300
-                                 cursor-text"
+                                 cursor-text text-white"
                     />
                     <Pencil
                       size={16}
-                      className="text-gray-700 mt-1 pointer-events-none"
+                      className="text-white mt-1 pointer-events-none"
                     />
                   </div>
 
-                  {/* BORRAR */}
                   <button
                     onClick={() => deleteValue(item.id)}
                     className="absolute top-2 right-2 px-2 py-1 rounded bg-red-600 text-white text-sm"
@@ -86,7 +85,7 @@ export default function CompanyValues() {
                   </button>
                 </>
               ) : (
-                <p className="text-lg font-medium text-gray-700">
+                <p className="text-lg font-medium text-white">
                   {item.text}
                 </p>
               )}
@@ -98,7 +97,7 @@ export default function CompanyValues() {
           <div className="flex justify-center mt-10">
             <button
               onClick={addValue}
-              className="px-6 py-3 bg-[var(--color-principal)]  text-white rounded-lg hover:bg-[var(--color-principal-hover)] cursor-pointer"
+              className="px-6 py-3 bg-[var(--color-principal)] text-white rounded-lg hover:bg-[var(--color-principal-hover)] cursor-pointer"
             >
               + Agregar valor
             </button>

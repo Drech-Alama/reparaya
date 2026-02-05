@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import defaultHero from "../../assets/images/localGT.webp";
+import defaultHero from "../../assets/images/localILUCAS.webp";
 import CompanyDescription from "../../components/houseComponents/CompanyDescription";
 import CompanyValues from "../../components/houseComponents/CompanyValues";
 import { Pencil } from "lucide-react";
 import WhatsappFloatingButton from "../../components/WhatsappFloatingButton";
+
 /* =====================
    STORAGE KEYS
 ===================== */
-const HERO_KEY = "house_gtphone";
-const PROMOS_KEY = "house_gtphone_promotions";
-const GALLERY_KEY = "house_gtphone_gallery";
+const HERO_KEY = "house_ilucas";
+const PROMOS_KEY = "house_ilucas_promotions";
+const GALLERY_KEY = "house_ilucas_gallery";
 
 /* =====================
    PROMOS POR DEFECTO
@@ -18,25 +19,25 @@ const defaultPromotions = [
   {
     id: 1,
     title: "Cambio de pantalla",
-    company: "GT Phone Service",
+    company: "iLucas",
     description: "Pantallas originales con garantía",
-    whatsapp: "51995669995",
+    whatsapp: "51988887777",
     image: defaultHero,
   },
   {
     id: 2,
     title: "Cambio de batería",
-    company: "GT Phone Service",
+    company: "iLucas",
     description: "Baterías de larga duración",
-    whatsapp: "51995669995",
+    whatsapp: "51988887777",
     image: defaultHero,
   },
   {
     id: 3,
     title: "Desbloqueo de equipo",
-    company: "GT Phone Service",
+    company: "iLucas",
     description: "Servicio rápido y seguro",
-    whatsapp: "51995669995",
+    whatsapp: "51988887777",
     image: defaultHero,
   },
 ];
@@ -50,14 +51,14 @@ const defaultGallery = [
   { id: 3, image: defaultHero },
 ];
 
-export default function HouseGtphone() {
+export default function HouseIlucas() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const isTecnico = user?.role === "tecnico";
 
   /* =====================
      HERO
   ===================== */
-  const [companyName, setCompanyName] = useState("GT Phone Service");
+  const [companyName, setCompanyName] = useState("iLucas");
   const [heroImage, setHeroImage] = useState(defaultHero);
 
   /* =====================
@@ -76,7 +77,7 @@ export default function HouseGtphone() {
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(HERO_KEY));
     if (saved) {
-      setCompanyName(saved.companyName || "GT Phone Service");
+      setCompanyName(saved.companyName || "iLucas");
       setHeroImage(saved.heroImage || defaultHero);
     }
   }, []);
@@ -232,8 +233,6 @@ Estoy interesado en esta promoción:
                      text-white text-3xl md:text-5xl font-bold
                      text-center outline-none cursor-text"
               />
-
-              {/* ÍCONO VISIBLE */}
               <Pencil
                 size={26}
                 className="text-white opacity-90 pointer-events-none"
@@ -307,7 +306,6 @@ Estoy interesado en esta promoción:
               <div className="p-4 space-y-3">
                 {isTecnico ? (
                   <>
-                    {/* TÍTULO */}
                     <div className="flex items-center gap-2">
                       <input
                         value={promo.title}
@@ -319,7 +317,6 @@ Estoy interesado en esta promoción:
                       <Pencil size={16} className="text-gray-700" />
                     </div>
 
-                    {/* EMPRESA */}
                     <div className="flex items-center gap-2">
                       <input
                         value={promo.company}
@@ -331,7 +328,6 @@ Estoy interesado en esta promoción:
                       <Pencil size={16} className="text-gray-700" />
                     </div>
 
-                    {/* WHATSAPP (NO VISIBLE PARA CLIENTE) */}
                     <div className="flex items-center gap-2">
                       <input
                         value={promo.whatsapp}
@@ -343,7 +339,6 @@ Estoy interesado en esta promoción:
                       <Pencil size={16} className="text-gray-700" />
                     </div>
 
-                    {/* DESCRIPCIÓN */}
                     <div className="flex gap-2 items-start">
                       <textarea
                         value={promo.description}
@@ -370,52 +365,51 @@ Estoy interesado en esta promoción:
       </section>
 
       {/* ================= GALERÍA ================= */}
-
       <section className="bg-[var(--color-principal)] py-16">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="flex justify-between mb-8">
-      <h2 className="text-3xl font-bold text-white">Galería</h2>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-between mb-8">
+            <h2 className="text-3xl font-bold text-white">Galería</h2>
 
-      {isTecnico && (
-        <label className="bg-white text-[var(--color-principal)] px-4 py-2 rounded cursor-pointer">
-          + Agregar imagen
-          <input
-            hidden
-            type="file"
-            accept="image/*"
-            private
-            onChange={(e) => addGalleryImage(e.target.files[0])}
-          />
-        </label>
-      )}
-    </div>
+            {isTecnico && (
+              <label className="bg-white text-[var(--color-principal)] px-4 py-2 rounded cursor-pointer">
+                + Agregar imagen
+                <input
+                  hidden
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => addGalleryImage(e.target.files[0])}
+                />
+              </label>
+            )}
+          </div>
 
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {gallery.map((img) => (
-        <div key={img.id} className="relative">
-          <img
-            src={img.image}
-            className="w-full h-56 object-cover rounded"
-          />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {gallery.map((img) => (
+              <div key={img.id} className="relative">
+                <img
+                  src={img.image}
+                  className="w-full h-56 object-cover rounded"
+                />
 
-          {isTecnico && (
-            <button
-              onClick={() => deleteGalleryImage(img.id)}
-              className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded"
-            >
-              Borrar
-            </button>
-          )}
+                {isTecnico && (
+                  <button
+                    onClick={() => deleteGalleryImage(img.id)}
+                    className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded"
+                  >
+                    Borrar
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       <CompanyDescription />
       <CompanyValues />
+
       <WhatsappFloatingButton
-        phone="51911223344"   // 👈 WhatsApp de GT Phone
+        phone="51988887777"
         color="#22c55e"
       />
     </>
