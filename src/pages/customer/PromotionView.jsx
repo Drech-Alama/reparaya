@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PromotionCard from "../../components/PromotionCard";
+import renovacion from "../../assets/images/promo2.webp";
+import cambioBateria from "../../assets/images/promo1.webp";
+import cambioTapa from "../../assets/images/promo3.webp";
+
 
 export default function PromotionView() {
   const navigate = useNavigate();
@@ -8,28 +12,28 @@ export default function PromotionView() {
 
   // ================= PROMOCIONES ESTÁTICAS =================
   const staticPromos = [
-    {
-      id: "s1",
-      title: "GT Phone",
-      company: "GT Phone Service",
-      description: "Reparación y accesorios",
-      image: "/assets/images/localGT.webp",
-      link: "/tienda/gtphone",
-    },
+      {
+    id: "s1",
+    title: "Renovación de equipo",
+    company: "GT Phone",
+    description: "Renueva tu equipo con pantallas originales y garantía incluida",
+    image: renovacion,
+    link: "/tienda/gtphone",
+  },
     {
       id: "s2",
-      title: "Soluciones MC",
+      title: "Cambio de batería",
       company: "Soluciones MC",
-      description: "Tecnología y soporte",
-      image: "/assets/images/localGT.webp",
+      description: "Reemplaza tu batería por una de larga duración y rendimiento óptimo",
+      image: cambioBateria,
       link: "/tienda/solucionesmc",
     },
     {
       id: "s3",
-      title: "ILucas",
+      title: "Cambio de tapa",
       company: "ILucas",
-      description: "Soluciones digitales",
-      image: "/assets/images/localGT.webp",
+      description: "Cambia la tapa de tu equipo con un servicio rápido, seguro y profesional",
+      image: cambioTapa,
       link: "/tienda/ilucas",
     },
   ];

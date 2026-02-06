@@ -74,7 +74,8 @@ export default function FormEditPlan({ role = "cliente" }) {
         </button>
 
         <h2 className="text-2xl mb-6 text-center text-[var(--color-principal)] font-bold">
-          Registro {role === "cliente" ? "Cliente" : "Técnico"}
+           {/* {role === "cliente" ? "Cliente" : "Técnico"} */}
+           Mi Perfil
         </h2>
 
         <div className="flex flex-col items-center gap-3">

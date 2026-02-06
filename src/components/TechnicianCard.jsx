@@ -2,10 +2,11 @@ export default function TechnicianCard({ tech, onClick }) {
   if (!tech) return null;
 
   // Siempre mostrar un mapa válido aunque no haya uno real
-  const mapSrc =
-    tech.mapUrl && tech.mapUrl.includes("/maps/embed") 
-      ? tech.mapUrl 
-      : "https://maps.google.com/maps?q=12.059624,-77.035212&z=15&output=embed";
+const mapSrc =
+  tech.mapUrl && tech.mapUrl.includes("/maps/embed")
+    ? tech.mapUrl
+    : "https://maps.google.com/maps?q=-12.0535,-77.0560&z=15&output=embed";
+
 
   return (
     <div
@@ -15,7 +16,7 @@ export default function TechnicianCard({ tech, onClick }) {
       <img
         src={tech.image || "/placeholder-tech.png"}
         alt={tech.company || "Técnico"}
-        className="w-full h-40 object-cover rounded mb-3"
+        className="w-full h-40 object-cover rounded mb-3 object-center"
       />
 
       <h3 className="font-bold text-lg">{tech.company || "Empresa sin nombre"}</h3>
