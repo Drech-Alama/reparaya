@@ -5,6 +5,17 @@ import CompanyValues from "../../components/houseComponents/CompanyValues";
 import { Pencil } from "lucide-react";
 import WhatsappFloatingButton from "../../components/WhatsappFloatingButton";
 
+// Promociones
+import promotionCard1 from "../../assets/images/promo1.webp";
+import promotionCard2 from "../../assets/images/promo2.webp";
+import promotionCard3 from "../../assets/images/promo3.webp";
+
+// Galería
+import galeriaCard1 from "../../assets/images/reparo1.jpg";
+import galeriaCard2 from "../../assets/images/reparo2.webp";
+import galeriaCard3 from "../../assets/images/reparo3.webp";
+
+
 /* =====================
    STORAGE KEYS
 ===================== */
@@ -16,39 +27,39 @@ const GALLERY_KEY = "house_ilucas_gallery";
    PROMOS POR DEFECTO
 ===================== */
 const defaultPromotions = [
-  {
-    id: 1,
-    title: "Cambio de pantalla",
-    company: "iLucas",
-    description: "Pantallas originales con garantía",
-    whatsapp: "51988887777",
-    image: defaultHero,
-  },
-  {
-    id: 2,
-    title: "Cambio de batería",
-    company: "iLucas",
-    description: "Baterías de larga duración",
-    whatsapp: "51988887777",
-    image: defaultHero,
-  },
-  {
-    id: 3,
-    title: "Desbloqueo de equipo",
-    company: "iLucas",
-    description: "Servicio rápido y seguro",
-    whatsapp: "51988887777",
-    image: defaultHero,
-  },
+    {
+      id: 1,
+      title: "Renovación de equipo",
+      company: "GT Phone",
+      description: "Renueva tu equipo con pantallas originales y garantía incluida",
+      whatsapp: "51995669995",
+      image: promotionCard2,
+    },
+    {
+      id: 2,
+      title: "Cambio de batería",
+      company: "GT Phone",
+      description: "Reemplaza tu batería por una de larga duración y rendimiento óptimo",
+      whatsapp: "51995669995",
+      image: promotionCard1,
+    },
+    {
+      id: 3,
+      title: "Cambio de tapa",
+      company: "GT Phone",
+      description: "Cambia la tapa de tu equipo con un servicio rápido, seguro y profesional",
+      whatsapp: "51995669995",
+      image: promotionCard3,
+    },
 ];
 
 /* =====================
    GALERÍA POR DEFECTO
 ===================== */
 const defaultGallery = [
-  { id: 1, image: defaultHero },
-  { id: 2, image: defaultHero },
-  { id: 3, image: defaultHero },
+  { id: 1, image: galeriaCard2 },
+  { id: 2, image: galeriaCard1 },
+  { id: 3, image: galeriaCard3 },
 ];
 
 export default function HouseIlucas() {

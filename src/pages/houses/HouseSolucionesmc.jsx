@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
-import defaultHero from "../../assets/images/localGT.webp";
+import defaultHero from "../../assets/images/localSolucionesmc.webp";
 import CompanyDescription from "../../components/houseComponents/CompanyDescription";
 import CompanyValues from "../../components/houseComponents/CompanyValues";
 import { Pencil } from "lucide-react";
 import WhatsappFloatingButton from "../../components/WhatsappFloatingButton";
+
+// Promociones
+import promotionCard1 from "../../assets/images/promo1.webp";
+import promotionCard2 from "../../assets/images/promo2.webp";
+import promotionCard3 from "../../assets/images/promo3.webp";
+
+// Galería
+import galeriaCard1 from "../../assets/images/reparo1.jpg";
+import galeriaCard2 from "../../assets/images/reparo2.webp";
+import galeriaCard3 from "../../assets/images/reparo3.webp";
 
 /* =====================
    STORAGE KEYS
@@ -17,28 +27,28 @@ const GALLERY_KEY = "house_solucionesmc_gallery";
 ===================== */
 const defaultPromotions = [
     {
-        id: 1,
-        title: "Servicios eléctricos",
-        company: "Soluciones MC",
-        description: "Instalaciones y reparaciones seguras",
-        whatsapp: "51988888888",
-        image: defaultHero,
+      id: 1,
+      title: "Renovación de equipo",
+      company: "GT Phone",
+      description: "Renueva tu equipo con pantallas originales y garantía incluida",
+      whatsapp: "51995669995",
+      image: promotionCard2,
     },
     {
-        id: 2,
-        title: "Mantenimiento técnico",
-        company: "Soluciones MC",
-        description: "Prevención y solución de fallas",
-        whatsapp: "51988888888",
-        image: defaultHero,
+      id: 2,
+      title: "Cambio de batería",
+      company: "GT Phone",
+      description: "Reemplaza tu batería por una de larga duración y rendimiento óptimo",
+      whatsapp: "51995669995",
+      image: promotionCard1,
     },
     {
-        id: 3,
-        title: "Soporte técnico",
-        company: "Soluciones MC",
-        description: "Atención rápida y profesional",
-        whatsapp: "51988888888",
-        image: defaultHero,
+      id: 3,
+      title: "Cambio de tapa",
+      company: "GT Phone",
+      description: "Cambia la tapa de tu equipo con un servicio rápido, seguro y profesional",
+      whatsapp: "51995669995",
+      image: promotionCard3,
     },
 ];
 
@@ -46,10 +56,11 @@ const defaultPromotions = [
    GALERÍA POR DEFECTO
 ===================== */
 const defaultGallery = [
-    { id: 1, image: defaultHero },
-    { id: 2, image: defaultHero },
-    { id: 3, image: defaultHero },
+  { id: 1, image: galeriaCard3 },
+  { id: 2, image: galeriaCard2 },
+  { id: 3, image: galeriaCard1 },
 ];
+
 
 export default function HouseSolucionesmc() {
     const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -207,7 +218,7 @@ Estoy interesado en esta promoción:
             <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
                 <img
                     src={heroImage}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover "
                 />
                 <div className="absolute inset-0 bg-black/50" />
 

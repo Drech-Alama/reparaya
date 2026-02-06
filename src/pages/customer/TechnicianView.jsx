@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TechnicianCard from "../../components/TechnicianCard";
 
+// Imagen técnicos
+import gtphone from "../../assets/images/localGt.webp";
+import solucionesmc from "../../assets/images/localSolucionesmc.webp";
+import ilucas from "../../assets/images/localIlucas.webp";
+
 export default function TechnicianView() {
   const [technicians, setTechnicians] = useState([]);
   const navigate = useNavigate();
@@ -13,7 +18,7 @@ export default function TechnicianView() {
       company: "GT Phone Service",
       technicianName: "Juan Pérez",
       address: "Av. Siempre Viva 123",
-      image: "/assets/images/localGT.webp",
+      image: gtphone,
       link: "/tienda/gtphone",
       mapUrl: "https://maps.google.com/maps?q=12.059624,-77.035212&z=15&output=embed",
     },
@@ -22,7 +27,7 @@ export default function TechnicianView() {
       company: "Soluciones MC",
       technicianName: "María Gómez",
       address: "Calle Falsa 456",
-      image: "/assets/images/localGT.webp",
+      image: solucionesmc,
       link: "/tienda/solucionesmc",
       mapUrl: "https://maps.google.com/maps?q=12.060000,-77.036000&z=15&output=embed",
     },
@@ -31,7 +36,7 @@ export default function TechnicianView() {
       company: "ILucas",
       technicianName: "Carlos Ruiz",
       address: "Jr. Tecnología 789",
-      image: "/assets/images/localGT.webp",
+      image: ilucas,
       link: "/tienda/ilucas",
       mapUrl: "https://maps.google.com/maps?q=12.061000,-77.037000&z=15&output=embed",
     },

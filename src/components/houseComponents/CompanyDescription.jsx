@@ -9,9 +9,9 @@ export default function CompanyDescription({ companyKey }) {
 
   const STORAGE_KEY = `${companyKey}_description`;
 
-  const [title, setTitle] = useState("Sobre nuestra empresa");
+  const [title, setTitle] = useState("Expertos en dispositivos");
   const [description, setDescription] = useState(
-    "Somos una empresa especializada en soluciones técnicas..."
+    "Nos dedicamos a ofrecer servicios de reparación de celulares rápidos, confiables y con garantía, asegurando que tu dispositivo recupere su rendimiento óptimo. Nuestro equipo de técnicos certificados utiliza repuestos originales."
   );
 
   useEffect(() => {

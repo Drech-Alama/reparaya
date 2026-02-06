@@ -7,7 +7,7 @@ export default function PromotionCard({ promo, onClick }) {
       <img
         src={promo.image || "/placeholder-promo.png"}
         alt={promo.title}
-        className="w-full h-40 object-cover rounded"
+        className="w-full h-40 object-cover rounded "
       />
 
       <h3 className="font-bold mt-2 text-lg">

@@ -17,6 +17,14 @@ export default function TechnicianHeader() {
 
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
+  // 👉 FOTO TOLERANTE A DISTINTOS NOMBRES
+  const photo =
+    user?.photo ||
+    user?.avatar ||
+    user?.image ||
+    user?.foto ||
+    "/images/avatar-default.png";
+
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
     navigate("/login");
@@ -39,11 +47,7 @@ export default function TechnicianHeader() {
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => navigate("/dashboard")}
         >
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-10 w-auto object-contain"
-          />
+          <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
         </div>
 
         {/* NAV DESKTOP */}
@@ -70,13 +74,11 @@ export default function TechnicianHeader() {
             onClick={() => navigate("/editar-plan")}
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
           >
-            {user?.photo && (
-              <img
-                src={user.photo}
-                alt="Perfil"
-                className="w-9 h-9 rounded-full object-cover border"
-              />
-            )}
+            <img
+              src={photo}
+              alt="Perfil"
+              className="w-9 h-9 rounded-full object-cover border"
+            />
             <span className="font-semibold text-sm">
               👨‍🔧 {user?.fullName || user?.username || user?.email}
             </span>
@@ -126,13 +128,11 @@ export default function TechnicianHeader() {
               }}
               className="flex items-center gap-3 mt-3 border-t border-white/20 pt-3 cursor-pointer hover:opacity-80 transition"
             >
-              {user?.photo && (
-                <img
-                  src={user.photo}
-                  alt="Perfil"
-                  className="w-9 h-9 rounded-full object-cover border"
-                />
-              )}
+              <img
+                src={photo}
+                alt="Perfil"
+                className="w-9 h-9 rounded-full object-cover border"
+              />
               <span className="text-sm font-semibold">
                 👨‍🔧 {user?.fullName || user?.username || user?.email}
               </span>
