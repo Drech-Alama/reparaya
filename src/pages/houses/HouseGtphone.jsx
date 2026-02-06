@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import defaultHero from "../../assets/images/localGT.webp";
+import defaultHero from "../../assets/images/localgt.webp";
 import CompanyDescription from "../../components/houseComponents/CompanyDescription";
 import CompanyValues from "../../components/houseComponents/CompanyValues";
 import { Pencil } from "lucide-react";
