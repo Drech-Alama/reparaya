@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TechnicianCard from "../../components/TechnicianCard";
 
 // Imagen técnicos
-import gtphone from "../../assets/images/localGt.webp";
+import gtphone from "../../assets/images/localgt.webp";
 import solucionesmc from "../../assets/images/localSolucionesmc.webp";
 import ilucas from "../../assets/images/localilucas.webp";
 
