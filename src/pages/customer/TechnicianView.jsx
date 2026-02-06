@@ -5,7 +5,7 @@ import TechnicianCard from "../../components/TechnicianCard";
 // Imagen técnicos
 import gtphone from "../../assets/images/localGt.webp";
 import solucionesmc from "../../assets/images/localSolucionesmc.webp";
-import ilucas from "../../assets/images/localIlucas.webp";
+import ilucas from "../../assets/images/localilucas.webp";
 
 export default function TechnicianView() {
   const [technicians, setTechnicians] = useState([]);
