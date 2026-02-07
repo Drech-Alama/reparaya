@@ -9,7 +9,7 @@ import {
   History,
   LogOut,
 } from "lucide-react";
-import logo from "../assets/images/logoReparaYa.png";
+import logo from "../assets/images/logoreparaya.png";
 
 export default function ClientHeader({ user }) {
   const navigate = useNavigate();
