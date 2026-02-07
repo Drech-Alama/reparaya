@@ -5,7 +5,7 @@ import ClientHeader from "../../components/ClientHeader";
 // 🔹 IMPORTAR IMÁGENES
 import tecnico1 from "../../assets/images/localgt.webp";
 import tecnico2 from "../../assets/images/localilucas.webp";
-import tecnico3 from "../../assets/images/slider1.webp";
+import tecnico3 from "../../assets/images/localsolucionesmc.webp";
 
 
 export default function Home() {

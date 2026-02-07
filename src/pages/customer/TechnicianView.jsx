@@ -4,7 +4,7 @@ import TechnicianCard from "../../components/TechnicianCard";
 
 // Imagen técnicos
 import gtphone from "../../assets/images/localgt.webp";
-import solucionesmc from "../../assets/images/localSolucionesmc.webp";
+import solucionesmc from "../../assets/images/localsolucionesmc.webp";
 import ilucas from "../../assets/images/localilucas.webp";
 
 export default function TechnicianView() {
