@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import ClientHeader from "../../components/ClientHeader";
 
 // 🔹 IMPORTAR IMÁGENES
-import tecnico1 from "../../assets/images/localgt.webp";
-import tecnico2 from "../../assets/images/localilucas.webp";
-import tecnico3 from "../../assets/images/localsolucionesmc.webp";
+import tecnico1 from "../../assets/images/slider3.webp";
+import tecnico2 from "../../assets/images/slider2.webp";
+import tecnico3 from "../../assets/images/slider1.webp";
 
 
 export default function Home() {
@@ -88,7 +88,7 @@ export default function Home() {
         <div className="absolute bottom-10 w-full flex justify-center">
           <button
             onClick={() => navigate("/tecnicos")}
-            className="bg-[var(--color-principal)] hover:bg-[var(--color-principal-hover)] text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-xl"
+            className="bg-[var(--color-principal)] hover:bg-[var(--color-principal-hover)] text-white mb-8 px-8 py-4 rounded-xl text-lg font-semibold shadow-xl"
           >
             Ver Técnicos Disponibles
           </button>
