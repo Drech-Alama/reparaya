@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import img1 from "../assets/images/localGT.jpeg";
+import img1 from "../assets/images/localgt.webp";
 import img2 from "../assets/images/slider1.webp";
 import img3 from "../assets/images/slider2.webp";
 import img4 from "../assets/images/slider3.webp";

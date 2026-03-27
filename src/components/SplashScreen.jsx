@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import logo from "../assets/images/logoReparaYa.png";
+import logo from "../assets/images/logoreparaya.png";
 
 export default function SplashScreen({ onFinish }) {
   useEffect(() => {

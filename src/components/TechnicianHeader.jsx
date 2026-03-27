@@ -9,7 +9,7 @@ import {
   Tag,
   History,
 } from "lucide-react";
-import logo from "../assets/images/logoReparaYa.png";
+import logo from "../assets/images/logoreparaya.png";
 
 export default function TechnicianHeader() {
   const navigate = useNavigate();
